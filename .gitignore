@@ -16,6 +16,10 @@ coverage.html
 
 # Vim
 *.sw?
+*~
 
 # Local TODO
 TODO.md
+
+# vscode
+.vscode/
