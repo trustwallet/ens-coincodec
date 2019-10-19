@@ -26,6 +26,8 @@ import (
 func init() {
 	toBytesMap[slip44.ETHER] = EtherToBytes
 	toStringMap[slip44.ETHER] = EtherToString
+	toBytesMap[slip44.ETHER_CLASSIC] = EtherToBytes
+	toStringMap[slip44.ETHER_CLASSIC] = EtherToString
 }
 
 // EtherToBytes converts the input string to a byte array.
