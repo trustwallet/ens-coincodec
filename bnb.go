@@ -5,8 +5,11 @@ import (
 	"github.com/wealdtech/go-slip44"
 )
 
-var bnbMainnetHRP = "bnb"
-var bnbKeyHashLength = 20
+const (
+	BNB_MAINNET_HRP    = "bnb"
+	BNB_KEYHASH_LENGTH = 20
+)
+
 var bnbKeyHashError = errors.New("BNB address key hash must be 20 bytes")
 
 func init() {
@@ -17,11 +20,11 @@ func init() {
 // BNBDecodeToBytes converts the input string to a byte array
 func BNBDecodeToBytes(input string) ([]byte, error) {
 	var empty []byte
-	bytes, err := Bech32DecodeToBytes(input, bnbMainnetHRP)
+	bytes, err := Bech32DecodeToBytes(input, BNB_MAINNET_HRP)
 	if err != nil {
 		return empty, err
 	}
-	if len(bytes) != bnbKeyHashLength {
+	if len(bytes) != BNB_KEYHASH_LENGTH {
 		return empty, bnbKeyHashError
 	}
 	return bytes, nil
@@ -29,8 +32,8 @@ func BNBDecodeToBytes(input string) ([]byte, error) {
 
 // BNBEncodeToString converts the input byte array to a string representation of the BNB address.
 func BNBEncodeToString(bytes []byte) (string, error) {
-	if len(bytes) != bnbKeyHashLength {
+	if len(bytes) != BNB_KEYHASH_LENGTH {
 		return "", bnbKeyHashError
 	}
-	return Bech32EncodeToString(bytes, bnbMainnetHRP)
+	return Bech32EncodeToString(bytes, BNB_MAINNET_HRP)
 }
