@@ -28,15 +28,14 @@ const (
 	OP_EQUAL       = 0x87
 )
 
-var p2pkhScriptPrefix []byte
-var p2shScriptPrefix []byte
+var (
+	P2PKH_SCRIPT_PREFIX = []byte{OP_DUP, OP_HASH160, BTC_KEYHASH_LENGTH}
+	P2SH_SCRIPT_PREFIX  = []byte{OP_HASH160, BTC_KEYHASH_LENGTH}
+)
 
 func init() {
 	toBytesMap[slip44.BITCOIN] = BitcoinDecodeToBytes
 	toStringMap[slip44.BITCOIN] = BitcoinEncodeToString
-
-	p2pkhScriptPrefix = []byte{OP_DUP, OP_HASH160, BTC_KEYHASH_LENGTH}
-	p2shScriptPrefix = []byte{OP_HASH160, BTC_KEYHASH_LENGTH}
 }
 
 // BitcoinDecodeToBytes converts the input string to a byte array
@@ -76,13 +75,13 @@ func BitcoinEncodeToString(input []byte) (string, error) {
 	if len(input) == 0 {
 		return "", errors.New("invalid data length")
 	}
-	if bytes.HasPrefix(input, p2pkhScriptPrefix) {
+	if bytes.HasPrefix(input, P2PKH_SCRIPT_PREFIX) {
 		return base58.CheckEncode(input[3:len(input)-2], BTC_P2PKH_PREFIX), nil
-	} else if bytes.HasPrefix(input, p2shScriptPrefix) {
+	} else if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
 		return base58.CheckEncode(input[2:len(input)-1], BTC_P2SH_Prefix), nil
 	} else if input[0] == BTC_WITNESS_VERSION && len(input) > 2 {
 		if int(input[1]) != len(input)-2 {
-			return "nil", errors.New("wrong script data")
+			return "", errors.New("wrong script data")
 		}
 		converted, err := bech32.ConvertBits(input[2:], 8, 5, true)
 		if err != nil {
@@ -96,15 +95,18 @@ func BitcoinEncodeToString(input []byte) (string, error) {
 }
 
 func buildP2PKHScript(bytes []byte) []byte {
-	script := p2pkhScriptPrefix
+	var script []byte
 	suffix := []byte{OP_EQUALVERIFY, OP_CHECKSIG}
+
+	script = append(script, P2PKH_SCRIPT_PREFIX...)
 	script = append(script, bytes...)
 	script = append(script, suffix...)
 	return script
 }
 
 func buildP2SHScript(bytes []byte) []byte {
-	script := p2shScriptPrefix
+	var script []byte
+	script = append(script, P2SH_SCRIPT_PREFIX...)
 	script = append(script, bytes...)
 	script = append(script, OP_EQUAL)
 	return script
