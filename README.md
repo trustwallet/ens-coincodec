@@ -22,7 +22,7 @@ Go utility library to provide movement between string and binary representation 
 `go-coincodec` is a standard Go module which can be installed with:
 
 ```sh
-go get github.com/wealdtech/go-coincodec
+go get github.com/hewigovens/go-coincodec
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ import (
     "errors"
 
     slip44 "github.com/wealdtech/go-slip44"
-    cc "github.com/wealdtech/go-coincodec"
+    cc "github.com/hewigovens/go-coincodec"
 )
 
 func main() {

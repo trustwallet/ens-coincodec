@@ -1,4 +1,4 @@
-module github.com/wealdtech/go-coincodec
+module github.com/hewigovens/go-coincodec
 
 go 1.12
 
