@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/pkg/errors"
 	"github.com/wealdtech/go-slip44"
 )
 
@@ -181,6 +182,11 @@ func TestDashDecodeToBytes(t *testing.T) {
 			name:   "P2SH",
 			input:  "7gks9gWVmGeir7m4MhsSxMzXC2eXXAuuRD",
 			output: "a9149d646d71f0815c0cfd8cd08aa9d391cd127f378687",
+		},
+		{
+			name:  "Bitcoin Segwit",
+			input: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+			err:   errors.New("invalid format: version and/or checksum bytes missing"),
 		},
 	}
 	for _, tt := range tests {

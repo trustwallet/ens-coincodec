@@ -69,7 +69,7 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 	// try base58 first
 	bytes, version, err := base58.CheckDecode(input)
 	if err != nil {
-		if len(config.HRP) < 0 {
+		if len(config.HRP) <= 0 {
 			return nil, err
 		}
 		// try bech32

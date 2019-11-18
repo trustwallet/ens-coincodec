@@ -35,6 +35,16 @@ func TestBitcoinCashDecodeToBytes(t *testing.T) {
 			input:  "bitcoincash:ppm2qsznhks23z7629mms6s4cwef74vcwvn0h829pq",
 			output: "a91476a04053bda0a88bda5177b86a15c3b29f55987387",
 		},
+		{
+			name:  "Empty",
+			input: "",
+			err:   errors.New("invalid address"),
+		},
+		{
+			name:  "Testnet",
+			input: "bchtest:qpm2qsznhks23z7629mms6s4cwef74vcwvqcw003ap",
+			err:   errors.New("invalid hrp"),
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

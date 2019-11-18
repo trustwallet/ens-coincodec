@@ -31,7 +31,7 @@ func BitcoinCashDecodeToBytes(input string) ([]byte, error) {
 		return BitcoinDecodeToBytes(input)
 	} else {
 		if hrp != BCH_MAINNET_HRP {
-			return nil, errors.New("wrong hrp address")
+			return nil, errors.New("invalid hrp")
 		}
 		if addrType == bchutil.P2PKH {
 			return buildP2PKHScript(decoded), nil
