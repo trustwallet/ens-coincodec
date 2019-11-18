@@ -4,6 +4,8 @@ import (
 	"encoding/hex"
 	"reflect"
 	"testing"
+
+	"github.com/wealdtech/go-slip44"
 )
 
 func TestLitecoinDecodeToBytes(t *testing.T) {
@@ -31,7 +33,7 @@ func TestLitecoinDecodeToBytes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinDecodeToBytes(tt.input)
+			got, err := toBytesMap[slip44.LITECOIN](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
@@ -75,7 +77,7 @@ func TestLitecoinEncodeToString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinEncodeToString(tt.input)
+			got, err := toStringMap[slip44.LITECOIN](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
@@ -110,7 +112,7 @@ func TestDogeDecodeToBytes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinDecodeToBytes(tt.input)
+			got, err := toBytesMap[slip44.DOGECOIN](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
@@ -148,7 +150,7 @@ func TestDogeEncodeToString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinEncodeToString(tt.input)
+			got, err := toStringMap[slip44.DOGECOIN](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
@@ -183,7 +185,7 @@ func TestDashDecodeToBytes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinDecodeToBytes(tt.input)
+			got, err := toBytesMap[slip44.DASH](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
@@ -221,7 +223,7 @@ func TestDashEncodeToString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinEncodeToString(tt.input)
+			got, err := toStringMap[slip44.DASH](tt.input)
 			if tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
