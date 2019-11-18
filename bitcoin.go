@@ -10,13 +10,14 @@ import (
 	"github.com/wealdtech/go-slip44"
 )
 
+type CoinConfig struct {
+	P2PKHPrefix byte
+	P2SHPPrefix byte
+	HRP         string
+}
+
 const (
-	BTC_MAINNET_HRP = "bc"
-
-	BTC_P2PKH_PREFIX   = 0x00
-	BTC_P2SH_Prefix    = 0x05
-	BTC_KEYHASH_LENGTH = 0x14
-
+	BTC_KEYHASH_LENGTH  = 0x14
 	BTC_WITNESS_VERSION = 0x00
 )
 
@@ -29,6 +30,7 @@ const (
 )
 
 var (
+	BTC_CONFIG          = CoinConfig{P2PKHPrefix: 0x00, P2SHPPrefix: 0x05, HRP: "bc"}
 	P2PKH_SCRIPT_PREFIX = []byte{OP_DUP, OP_HASH160, BTC_KEYHASH_LENGTH}
 	P2SH_SCRIPT_PREFIX  = []byte{OP_HASH160, BTC_KEYHASH_LENGTH}
 )
@@ -40,18 +42,42 @@ func init() {
 
 // BitcoinDecodeToBytes converts the input string to a byte array
 func BitcoinDecodeToBytes(input string) ([]byte, error) {
+	return bitcoinDecodeToBytes(input, &BTC_CONFIG)
+}
+
+// BitcoinEncodeToString converts the input byte array to a string representation of the Bitcoin address.
+func BitcoinEncodeToString(input []byte) (string, error) {
+	return bitcoinEncodeToString(input, &BTC_CONFIG)
+}
+
+func MakeBitcoinDecodeToBytes(config *CoinConfig) func(string) ([]byte, error) {
+	return func(input string) ([]byte, error) {
+		return bitcoinDecodeToBytes(input, config)
+	}
+}
+
+func MakeBitcoinEncodeToString(config *CoinConfig) func([]byte) (string, error) {
+	return func(input []byte) (string, error) {
+		return bitcoinEncodeToString(input, config)
+	}
+}
+
+func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 	if len(input) == 0 {
 		return nil, errors.New("invalid address")
 	}
 	// try base58 first
 	bytes, version, err := base58.CheckDecode(input)
 	if err != nil {
+		if len(config.HRP) < 0 {
+			return nil, err
+		}
 		// try bech32
-		hrp, bytes, err := bech32.Decode(input)
+		decodedHrp, bytes, err := bech32.Decode(input)
 		if err != nil {
 			return nil, errors.Wrapf(err, "decoding bech32 failed")
 		}
-		if hrp != BTC_MAINNET_HRP {
+		if decodedHrp != config.HRP {
 			return nil, errors.New("invalid hrp")
 		}
 		return buildWitnessScript(bytes)
@@ -61,25 +87,24 @@ func BitcoinDecodeToBytes(input string) ([]byte, error) {
 			return nil, errors.New("invalid data length")
 		}
 		// check version byte
-		if version == BTC_P2PKH_PREFIX {
+		if version == config.P2PKHPrefix {
 			return buildP2PKHScript(bytes), nil
-		} else if version == BTC_P2SH_Prefix {
+		} else if version == config.P2SHPPrefix {
 			return buildP2SHScript(bytes), nil
 		}
 		return nil, errors.New("invalid address prefix")
 	}
 }
 
-// BitcoinEncodeToString converts the input byte array to a string representation of the Bitcoin address.
-func BitcoinEncodeToString(input []byte) (string, error) {
+func bitcoinEncodeToString(input []byte, config *CoinConfig) (string, error) {
 	if len(input) == 0 {
 		return "", errors.New("invalid data length")
 	}
 	if bytes.HasPrefix(input, P2PKH_SCRIPT_PREFIX) {
-		return base58.CheckEncode(input[3:len(input)-2], BTC_P2PKH_PREFIX), nil
+		return base58.CheckEncode(input[3:len(input)-2], config.P2PKHPrefix), nil
 	} else if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
-		return base58.CheckEncode(input[2:len(input)-1], BTC_P2SH_Prefix), nil
-	} else if input[0] == BTC_WITNESS_VERSION && len(input) > 2 {
+		return base58.CheckEncode(input[2:len(input)-1], config.P2SHPPrefix), nil
+	} else if input[0] == BTC_WITNESS_VERSION && len(input) > 2 && len(config.HRP) > 0 {
 		if int(input[1]) != len(input)-2 {
 			return "", errors.New("wrong script data")
 		}
@@ -89,7 +114,7 @@ func BitcoinEncodeToString(input []byte) (string, error) {
 		}
 		data := []byte{BTC_WITNESS_VERSION}
 		data = append(data, converted...)
-		return bech32.Encode(BTC_MAINNET_HRP, data)
+		return bech32.Encode(config.HRP, data)
 	}
 	return "", errors.New("invalid bytes")
 }

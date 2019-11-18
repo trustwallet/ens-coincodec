@@ -24,10 +24,15 @@ import (
 )
 
 func init() {
-	toBytesMap[slip44.ETHER] = EtherToBytes
-	toStringMap[slip44.ETHER] = EtherToString
-	toBytesMap[slip44.ETHER_CLASSIC] = EtherToBytes
-	toStringMap[slip44.ETHER_CLASSIC] = EtherToString
+	chains := []uint32{
+		slip44.ETHER, slip44.ETHER_CLASSIC, slip44.GOCHAIN_GO,
+		slip44.POA, slip44.CALLISTO, slip44.TOMO,
+		slip44.THUNDERCORE,
+	}
+	for _, c := range chains {
+		toBytesMap[c] = EtherToBytes
+		toStringMap[c] = EtherToString
+	}
 }
 
 // EtherToBytes converts the input string to a byte array.

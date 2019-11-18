@@ -1,0 +1,59 @@
+package coincodec
+
+import (
+	"bytes"
+	"fmt"
+
+	"github.com/pkg/errors"
+
+	"github.com/cpacia/bchutil"
+	"github.com/wealdtech/go-slip44"
+)
+
+const (
+	BCH_MAINNET_HRP = "bitcoincash"
+)
+
+func init() {
+	toBytesMap[slip44.BITCOIN_CASH] = BitcoinCashDecodeToBytes
+	toStringMap[slip44.BITCOIN_CASH] = BitcoinCashEncodeToString
+}
+
+// BitcoinCashDecodeToBytes converts the input string to a byte array
+func BitcoinCashDecodeToBytes(input string) ([]byte, error) {
+	if len(input) == 0 {
+		return nil, errors.New("invalid address")
+	}
+	// try cashaddr first
+	decoded, hrp, addrType, err := bchutil.CheckDecodeCashAddress(input)
+	if err != nil {
+		// try base58
+		return BitcoinDecodeToBytes(input)
+	} else {
+		if hrp != BCH_MAINNET_HRP {
+			return nil, errors.New("wrong hrp address")
+		}
+		if addrType == bchutil.P2PKH {
+			return buildP2PKHScript(decoded), nil
+		} else if addrType == bchutil.P2SH {
+			return buildP2SHScript(decoded), nil
+		} else {
+			return nil, errors.New("unknown address type")
+		}
+	}
+}
+
+// BitcoinCashEncodeToString converts the input byte array to a string representation of the Bitcoin address.
+func BitcoinCashEncodeToString(input []byte) (string, error) {
+	if len(input) == 0 {
+		return "", errors.New("invalid data length")
+	}
+	if bytes.HasPrefix(input, P2PKH_SCRIPT_PREFIX) {
+		address := bchutil.CheckEncodeCashAddress(input[3:len(input)-2], BCH_MAINNET_HRP, bchutil.P2PKH)
+		return fmt.Sprintf("%s:%s", BCH_MAINNET_HRP, address), nil
+	} else if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
+		address := bchutil.CheckEncodeCashAddress(input[2:len(input)-1], BCH_MAINNET_HRP, bchutil.P2SH)
+		return fmt.Sprintf("%s:%s", BCH_MAINNET_HRP, address), nil
+	}
+	return "", errors.New("wrong script data")
+}
