@@ -1,10 +1,10 @@
 # go-coincodec
 
-[![Tag](https://img.shields.io/github/tag/wealdtech/go-coincodec.svg)](https://github.com/wealdtech/go-coincodec/releases/)
-[![License](https://img.shields.io/github/license/wealdtech/go-coincodec.svg)](LICENSE)
-[![GoDoc](https://godoc.org/github.com/wealdtech/go-coincodec?status.svg)](https://godoc.org/github.com/wealdtech/go-coincodec)
-[![Travis CI](https://img.shields.io/travis/wealdtech/go-coincodec.svg)](https://travis-ci.org/wealdtech/go-coincodec)
-[![codecov.io](https://img.shields.io/codecov/c/github/wealdtech/go-coincodec.svg)](https://codecov.io/github/wealdtech/go-coincodec)
+[![Tag](https://img.shields.io/github/tag/hewigovens/go-coincodec.svg)](https://github.com/hewigovens/go-coincodec/releases/)
+[![License](https://img.shields.io/github/license/hewigovens/go-coincodec.svg)](LICENSE)
+[![GoDoc](https://godoc.org/github.com/hewigovens/go-coincodec?status.svg)](https://godoc.org/github.com/hewigovens/go-coincodec)
+[![Travis CI](https://img.shields.io/travis/hewigovens/go-coincodec.svg)](https://travis-ci.org/hewigovens/go-coincodec)
+[![codecov.io](https://img.shields.io/codecov/c/github/hewigovens/go-coincodec.svg)](https://codecov.io/github/hewigovens/go-coincodec)
 
 Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats.
 
@@ -56,11 +56,12 @@ func main() {
 
 ## Maintainers
 
-Jim McDonald: [@mcdee](https://github.com/mcdee).
+Jim McDonald: [@mcdee](https://github.com/mcdee).  
+Trust Wallet: https://github.com/TrustWallet
 
 ## Contribute
 
-Contributions welcome. Please check out [the issues](https://github.com/wealdtech/go-coincodec/issues).
+Contributions welcome. Please check out [the issues](https://github.com/hewigovens/go-coincodec/issues).
 
 If you are adding a new coin type please try to follow the following rules:
 
