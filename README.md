@@ -3,7 +3,7 @@
 [![Tag](https://img.shields.io/github/tag/hewigovens/go-coincodec.svg)](https://github.com/hewigovens/go-coincodec/releases/)
 [![License](https://img.shields.io/github/license/hewigovens/go-coincodec.svg)](LICENSE)
 [![GoDoc](https://godoc.org/github.com/hewigovens/go-coincodec?status.svg)](https://godoc.org/github.com/hewigovens/go-coincodec)
-[![Travis CI](https://img.shields.io/travis/hewigovens/go-coincodec.svg)](https://travis-ci.org/hewigovens/go-coincodec)
+[![Build Status](https://travis-ci.org/hewigovens/go-coincodec.svg?branch=master)](https://travis-ci.org/hewigovens/go-coincodec)
 [![codecov.io](https://img.shields.io/codecov/c/github/hewigovens/go-coincodec.svg)](https://codecov.io/github/hewigovens/go-coincodec)
 
 Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats.
