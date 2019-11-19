@@ -33,7 +33,7 @@ func TestBNBDecodeToBytes(t *testing.T) {
 		{
 			name:  "Invalid public key hash",
 			input: "bnb1vehk7cnpwga5a9et",
-			err:   errors.New("BNB address key hash must be 20 bytes"),
+			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 	}
 	for _, tt := range tests {
@@ -64,12 +64,12 @@ func TestBNBEncodeToString(t *testing.T) {
 		{
 			name:  "Nil",
 			input: nil,
-			err:   errors.New("BNB address key hash must be 20 bytes"),
+			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
 			name:  "Empty",
 			input: []byte{},
-			err:   errors.New("BNB address key hash must be 20 bytes"),
+			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
 			name:   "Good",

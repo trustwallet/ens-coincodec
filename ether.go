@@ -27,7 +27,7 @@ func init() {
 	chains := []uint32{
 		slip44.ETHER, slip44.ETHER_CLASSIC, slip44.GOCHAIN_GO,
 		slip44.POA, slip44.CALLISTO, slip44.TOMO,
-		slip44.THUNDERCORE,
+		slip44.THUNDERCORE, slip44.THETA, slip44.VECHAIN_TOKEN,
 	}
 	for _, c := range chains {
 		toBytesMap[c] = EtherToBytes
