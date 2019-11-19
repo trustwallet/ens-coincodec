@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	STELLAR_VERSION_BYTE_ACCOUNT_ID byte = 0x30
+	versionByteAccountId byte = 0x30
 )
 
 func init() {
@@ -20,16 +20,16 @@ func init() {
 	toStringMap[slip44.KIN] = StellarEncodeToString
 }
 
-// Converts the input string to a byte array
+// StellarDecodeToBytes converts the input string to a byte array
 func StellarDecodeToBytes(input string) ([]byte, error) {
 	decoded, err := base32.StdEncoding.DecodeString(input)
 	if err != nil {
 		return nil, errors.Wrap(err, "base32 decode error")
 	}
-	if decoded[0] != STELLAR_VERSION_BYTE_ACCOUNT_ID {
+	if decoded[0] != versionByteAccountId {
 		return nil, errors.New("invalid version byte")
 	}
-	checksum := Crc16(decoded[:len(decoded)-2])
+	checksum := crc16(decoded[:len(decoded)-2])
 	if !bytes.Equal(checksum, decoded[len(decoded)-2:]) {
 		return nil, errors.New("wrong checksum")
 	}
@@ -37,16 +37,16 @@ func StellarDecodeToBytes(input string) ([]byte, error) {
 	return decoded[1 : len(decoded)-2], nil
 }
 
-// Converts the input byte array to a string representation of the Cosmos address.
+// StellarEncodeToString converts the input byte array to a string representation of the Cosmos address.
 func StellarEncodeToString(bytes []byte) (string, error) {
-	data := []byte{STELLAR_VERSION_BYTE_ACCOUNT_ID}
+	data := []byte{versionByteAccountId}
 	data = append(data, bytes...)
-	checksum := Crc16(data)
+	checksum := crc16(data)
 	data = append(data, checksum...)
 	return base32.StdEncoding.EncodeToString(data), nil
 }
 
-func Crc16(bytes []byte) []byte {
+func crc16(bytes []byte) []byte {
 	// https://godoc.org/github.com/stellar/go/crc16
 	crc := uint16(0x0000)
 	polynomial := uint16(0x1021)

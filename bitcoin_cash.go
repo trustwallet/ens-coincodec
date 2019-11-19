@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	BCH_MAINNET_HRP = "bitcoincash"
+	hrpBCH = "bitcoincash"
 )
 
 func init() {
@@ -29,17 +29,16 @@ func BitcoinCashDecodeToBytes(input string) ([]byte, error) {
 	if err != nil {
 		// try base58
 		return BitcoinDecodeToBytes(input)
+	}
+	if hrp != hrpBCH {
+		return nil, errors.New("invalid hrp")
+	}
+	if addrType == bchutil.P2PKH {
+		return buildP2PKHScript(decoded), nil
+	} else if addrType == bchutil.P2SH {
+		return buildP2SHScript(decoded), nil
 	} else {
-		if hrp != BCH_MAINNET_HRP {
-			return nil, errors.New("invalid hrp")
-		}
-		if addrType == bchutil.P2PKH {
-			return buildP2PKHScript(decoded), nil
-		} else if addrType == bchutil.P2SH {
-			return buildP2SHScript(decoded), nil
-		} else {
-			return nil, errors.New("unknown address type")
-		}
+		return nil, errors.New("unknown address type")
 	}
 }
 
@@ -49,11 +48,11 @@ func BitcoinCashEncodeToString(input []byte) (string, error) {
 		return "", errors.New("invalid data length")
 	}
 	if bytes.HasPrefix(input, P2PKH_SCRIPT_PREFIX) {
-		address := bchutil.CheckEncodeCashAddress(input[3:len(input)-2], BCH_MAINNET_HRP, bchutil.P2PKH)
-		return fmt.Sprintf("%s:%s", BCH_MAINNET_HRP, address), nil
+		address := bchutil.CheckEncodeCashAddress(input[3:len(input)-2], hrpBCH, bchutil.P2PKH)
+		return fmt.Sprintf("%s:%s", hrpBCH, address), nil
 	} else if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
-		address := bchutil.CheckEncodeCashAddress(input[2:len(input)-1], BCH_MAINNET_HRP, bchutil.P2SH)
-		return fmt.Sprintf("%s:%s", BCH_MAINNET_HRP, address), nil
+		address := bchutil.CheckEncodeCashAddress(input[2:len(input)-1], hrpBCH, bchutil.P2SH)
+		return fmt.Sprintf("%s:%s", hrpBCH, address), nil
 	}
 	return "", errors.New("wrong script data")
 }

@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	BNB_MAINNET_HRP = "bnb"
+	hrpBNB = "bnb"
 )
 
 func init() {
@@ -15,12 +15,12 @@ func init() {
 
 // BNBDecodeToBytes converts the input string to a byte array
 func BNBDecodeToBytes(input string) ([]byte, error) {
-	bytes, err := Bech32AddressDecodeToBytes(BNB_MAINNET_HRP, input)
+	bytes, err := Bech32AddressDecodeToBytes(hrpBNB, input)
 	return bytes, err
 }
 
 // BNBEncodeToString converts the input byte array to a string representation of the BNB address.
 func BNBEncodeToString(bytes []byte) (string, error) {
-	output, err := Bech32AddressEncodeToString(BNB_MAINNET_HRP, bytes)
+	output, err := Bech32AddressEncodeToString(hrpBNB, bytes)
 	return output, err
 }

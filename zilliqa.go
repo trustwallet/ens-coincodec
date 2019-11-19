@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	ZIL_MAINNET_HRP = "zil"
+	hrpZIL = "zil"
 )
 
 func init() {
@@ -13,14 +13,14 @@ func init() {
 	toStringMap[slip44.ZILLIQA] = ZilliqaEncodeToString
 }
 
-// Converts the input string to a byte array
+// ZilliqaDecodeToBytes converts the input string to a byte array
 func ZilliqaDecodeToBytes(input string) ([]byte, error) {
-	bytes, err := Bech32AddressDecodeToBytes(ZIL_MAINNET_HRP, input)
+	bytes, err := Bech32AddressDecodeToBytes(hrpZIL, input)
 	return bytes, err
 }
 
-// Converts the input byte array to a string representation of the Cosmos address.
+// ZilliqaEncodeToString converts the input byte array to a string representation of the Cosmos address.
 func ZilliqaEncodeToString(bytes []byte) (string, error) {
-	output, err := Bech32AddressEncodeToString(ZIL_MAINNET_HRP, bytes)
+	output, err := Bech32AddressEncodeToString(hrpZIL, bytes)
 	return output, err
 }

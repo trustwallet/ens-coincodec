@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	COSMOS_MAINNET_HRP    = "cosmos"
+	hrp = "cosmos"
 )
 
 func init() {
@@ -15,12 +15,12 @@ func init() {
 
 // Converts the input string to a byte array
 func CosmosDecodeToBytes(input string) ([]byte, error) {
-	bytes, err := Bech32AddressDecodeToBytes(COSMOS_MAINNET_HRP, input)
+	bytes, err := Bech32AddressDecodeToBytes(hrp, input)
 	return bytes, err
 }
 
 // Converts the input byte array to a string representation of the Cosmos address.
 func CosmosEncodeToString(bytes []byte) (string, error) {
-	output, err := Bech32AddressEncodeToString(COSMOS_MAINNET_HRP, bytes)
+	output, err := Bech32AddressEncodeToString(hrp, bytes)
 	return output, err
 }

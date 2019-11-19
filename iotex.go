@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	IOTEX_MAINNET_HRP = "io"
+	hrpIOTEX = "io"
 )
 
 func init() {
@@ -13,14 +13,14 @@ func init() {
 	toStringMap[slip44.IOTEX] = IoTexEncodeToString
 }
 
-// Converts the input string to a byte array
+// IoTexDecodeToBytes converts the input string to a byte array
 func IoTexDecodeToBytes(input string) ([]byte, error) {
-	bytes, err := Bech32AddressDecodeToBytes(IOTEX_MAINNET_HRP, input)
+	bytes, err := Bech32AddressDecodeToBytes(hrpIOTEX, input)
 	return bytes, err
 }
 
-// Converts the input byte array to a string representation of the Cosmos address.
+// IoTexEncodeToString converts the input byte array to a string representation of the Cosmos address.
 func IoTexEncodeToString(bytes []byte) (string, error) {
-	output, err := Bech32AddressEncodeToString(IOTEX_MAINNET_HRP, bytes)
+	output, err := Bech32AddressEncodeToString(hrpIOTEX, bytes)
 	return output, err
 }

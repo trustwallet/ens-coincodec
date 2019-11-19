@@ -5,8 +5,9 @@
 [![GoDoc](https://godoc.org/github.com/hewigovens/go-coincodec?status.svg)](https://godoc.org/github.com/hewigovens/go-coincodec)
 [![Build Status](https://travis-ci.org/hewigovens/go-coincodec.svg?branch=master)](https://travis-ci.org/hewigovens/go-coincodec)
 [![codecov.io](https://img.shields.io/codecov/c/github/hewigovens/go-coincodec.svg)](https://codecov.io/github/hewigovens/go-coincodec)
+[![Go Report](https://goreportcard.com/badge/github.com/hewigovens/go-coincodec)](https://goreportcard.com/badge/github.com/hewigovens/go-coincodec)
 
-Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats.
+Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats, mainly for ENS.
 
 
 ## Table of Contents
@@ -56,7 +57,7 @@ func main() {
 
 ## Maintainers
 
-Jim McDonald: [@mcdee](https://github.com/mcdee).  
+Jim McDonald: [@mcdee](https://github.com/mcdee)
 Trust Wallet: https://github.com/TrustWallet
 
 ## Contribute
