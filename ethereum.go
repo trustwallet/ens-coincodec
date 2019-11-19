@@ -69,7 +69,7 @@ func EtherToString(input []byte) (string, error) {
 
 	unchecksummed := hex.EncodeToString(input)
 	sha := sha3.NewLegacyKeccak256()
-	sha.Write([]byte(unchecksummed))
+	_, _ = sha.Write([]byte(unchecksummed))
 	hash := sha.Sum(nil)
 
 	result := []byte(unchecksummed)

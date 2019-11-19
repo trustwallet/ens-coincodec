@@ -82,7 +82,7 @@ func TestEtherToBytes(t *testing.T) {
 				if err != nil {
 					t.Fatalf("Unexpected error: %v", err)
 				}
-				if bytes.Compare(test.output, output) != 0 {
+				if !bytes.Equal(test.output, output) {
 					t.Fatalf("Unexpected output: expected %x, received %x", test.output, output)
 				}
 			}
