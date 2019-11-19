@@ -14,7 +14,7 @@ func init() {
 	toStringMap[slip44.RIPPLE] = XRPEncodeToString
 }
 
-// Converts the input string to a byte array
+// XRPDecodeToBytes converts the input string to a byte array
 func XRPDecodeToBytes(input string) ([]byte, error) {
 	decoded, err := Base58Decode(input, xrpAlphabet)
 	if err != nil {
@@ -24,7 +24,7 @@ func XRPDecodeToBytes(input string) ([]byte, error) {
 	return decoded[:len(decoded)-4], nil
 }
 
-// Converts the input byte array to a string representation of the Cosmos address.
+// XRPEncodeToString converts the input byte array to a string representation of the XRP address.
 func XRPEncodeToString(bytes []byte) (string, error) {
 	return Base58Encode(bytes, xrpAlphabet), nil
 }

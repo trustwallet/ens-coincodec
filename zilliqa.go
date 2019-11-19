@@ -19,7 +19,7 @@ func ZilliqaDecodeToBytes(input string) ([]byte, error) {
 	return bytes, err
 }
 
-// ZilliqaEncodeToString converts the input byte array to a string representation of the Cosmos address.
+// ZilliqaEncodeToString converts the input byte array to a string representation of the Zilliqa address.
 func ZilliqaEncodeToString(bytes []byte) (string, error) {
 	output, err := Bech32AddressEncodeToString(hrpZIL, bytes)
 	return output, err

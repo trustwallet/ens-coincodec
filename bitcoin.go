@@ -51,12 +51,14 @@ func BitcoinEncodeToString(input []byte) (string, error) {
 	return bitcoinEncodeToString(input, &configBTC)
 }
 
+// MakeBitcoinDecodeToBytes takes a CoinConfig and returns a func to decode string to bytes
 func MakeBitcoinDecodeToBytes(config *CoinConfig) func(string) ([]byte, error) {
 	return func(input string) ([]byte, error) {
 		return bitcoinDecodeToBytes(input, config)
 	}
 }
 
+// MakeBitcoinEncodeToString takes a CoinConfig and returns a func to encode bytes to string
 func MakeBitcoinEncodeToString(config *CoinConfig) func([]byte) (string, error) {
 	return func(input []byte) (string, error) {
 		return bitcoinEncodeToString(input, config)
