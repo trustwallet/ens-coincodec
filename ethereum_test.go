@@ -25,7 +25,7 @@ func TestEtherToBytes(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("empty input"),
+			err:   errors.New("Ethereum address must have 40 characters"),
 		},
 		{
 			name:  "Blank",

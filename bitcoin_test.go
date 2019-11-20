@@ -47,7 +47,7 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("empty input"),
+			err:   errors.New("invalid address"),
 		},
 		{
 			name:  "Ethereum",
