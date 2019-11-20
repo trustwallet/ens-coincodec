@@ -1,11 +1,11 @@
 # go-coincodec
 
-[![Tag](https://img.shields.io/github/tag/hewigovens/go-coincodec.svg)](https://github.com/hewigovens/go-coincodec/releases/)
-[![License](https://img.shields.io/github/license/hewigovens/go-coincodec.svg)](LICENSE)
-[![GoDoc](https://godoc.org/github.com/hewigovens/go-coincodec?status.svg)](https://godoc.org/github.com/hewigovens/go-coincodec)
-[![Build Status](https://travis-ci.org/hewigovens/go-coincodec.svg?branch=master)](https://travis-ci.org/hewigovens/go-coincodec)
-[![codecov.io](https://img.shields.io/codecov/c/github/hewigovens/go-coincodec.svg)](https://codecov.io/github/hewigovens/go-coincodec)
-[![Go Report](https://goreportcard.com/badge/github.com/hewigovens/go-coincodec)](https://goreportcard.com/badge/github.com/hewigovens/go-coincodec)
+[![Tag](https://img.shields.io/github/tag/trustwallet/ens-coincodec.svg)](https://github.com/trustwallet/ens-coincodec/releases/)
+[![License](https://img.shields.io/github/license/trustwallet/ens-coincodec.svg)](LICENSE)
+[![GoDoc](https://godoc.org/github.com/trustwallet/ens-coincodec?status.svg)](https://godoc.org/github.com/trustwallet/ens-coincodec)
+[![Build Status](https://travis-ci.org/trustwallet/ens-coincodec.svg?branch=master)](https://travis-ci.org/trustwallet/ens-coincodec)
+[![codecov.io](https://img.shields.io/codecov/c/github/trustwallet/ens-coincodec.svg)](https://codecov.io/github/trustwallet/ens-coincodec)
+[![Go Report](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)
 
 Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats, mainly for ENS.
 
@@ -23,7 +23,7 @@ Go utility library to provide movement between string and binary representation 
 `go-coincodec` is a standard Go module which can be installed with:
 
 ```sh
-go get github.com/hewigovens/go-coincodec
+go get github.com/trustwallet/ens-coincodec
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ import (
     "errors"
 
     slip44 "github.com/wealdtech/go-slip44"
-    cc "github.com/hewigovens/go-coincodec"
+    cc "github.com/trustwallet/ens-coincodec"
 )
 
 func main() {
@@ -55,14 +55,9 @@ func main() {
 }
 ```
 
-## Maintainers
-
-Jim McDonald: [@mcdee](https://github.com/mcdee)
-Trust Wallet: https://github.com/TrustWallet
-
 ## Contribute
 
-Contributions welcome. Please check out [the issues](https://github.com/hewigovens/go-coincodec/issues).
+Contributions welcome. Please check out [the issues](https://github.com/trustwallet/ens-coincodec/issues).
 
 If you are adding a new coin type please try to follow the following rules:
 
@@ -72,4 +67,4 @@ If you are adding a new coin type please try to follow the following rules:
 
 ## License
 
-[Apache-2.0](LICENSE) © 2019 Weald Technology Trading Ltd
+[Apache-2.0](LICENSE) © 2019 Weald Technology Trading Ltd / Trust Wallet

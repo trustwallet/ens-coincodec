@@ -1,6 +1,6 @@
-module github.com/hewigovens/go-coincodec
+module github.com/trustwallet/ens-coincodec
 
-go 1.12
+go 1.13
 
 require (
 	github.com/btcsuite/btcd v0.20.1-beta // indirect
