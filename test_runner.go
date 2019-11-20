@@ -24,7 +24,10 @@ type TestcaseDecode struct {
 func RunTestsEncode(t *testing.T, coinType uint32, tests []TestcaseEncode) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := ToBytes(tt.input, coinType)
+			testfun, _ := toBytesMap[coinType]
+
+			got, err := testfun(tt.input)
+
 			var goterror string = "(no error)"
 			if err != nil { goterror = err.Error() }
 			if tt.err != nil {
@@ -51,7 +54,10 @@ func RunTestsDecode(t *testing.T, coinType uint32, tests []TestcaseDecode) {
 				t.Errorf("%v %v: Preparation error, input is not valid hex string err %v input %v", coinType, tt.name, err, tt.input)
 				return
 			}
-			got, err := ToString(decoded, coinType)
+			testfun, _ := toStringMap[coinType]
+
+			got, err := testfun(decoded)
+
 			var goterror string = "(no error)"
 			if err != nil { goterror = err.Error() }
 			if tt.err != nil {

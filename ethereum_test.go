@@ -72,7 +72,7 @@ func TestEtherToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("empty input"),
+			err:   errors.New("Ethereum address must have 20 bytes"),
 		},
 		{
 			name:  "Too short",

@@ -40,7 +40,7 @@ func TestBNBDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("empty input"),
+			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
 			name:  "Too short",
