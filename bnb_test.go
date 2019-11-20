@@ -1,20 +1,14 @@
 package coincodec
 
 import (
-	"encoding/hex"
-	"reflect"
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
-func TestBNBDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestBNBEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "Normal",
 			input:  "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
@@ -36,39 +30,21 @@ func TestBNBDecodeToBytes(t *testing.T) {
 			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := BNBDecodeToBytes(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BNBDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BNBDecodeToBytes() = %v, want %v", hex.EncodeToString(got), tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.BINANCE, tests)
 }
 
-func TestBNBEncodeToString(t *testing.T) {
-	keyhash, _ := hex.DecodeString("40c2979694bbc961023d1d27be6fc4d21a9febe6")
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
-		{
-			name:  "Nil",
-			input: nil,
-			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
-		},
+func TestBNBDecodeToString(t *testing.T) {
+	keyhash := "40c2979694bbc961023d1d27be6fc4d21a9febe6"
+	tests := []TestcaseDecode {
 		{
 			name:  "Empty",
-			input: []byte{},
+			input: "",
+			err:   errors.New("empty input"),
+		},
+		{
+			name:  "Too short",
+			input: "0102030405",
 			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
@@ -77,19 +53,6 @@ func TestBNBEncodeToString(t *testing.T) {
 			output: "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := BNBEncodeToString(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BNBEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BNBEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.BINANCE, tests)
 }
