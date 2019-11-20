@@ -14,7 +14,6 @@ Go utility library to provide movement between string and binary representation 
 
 - [Install](#install)
 - [Usage](#usage)
-- [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
 
