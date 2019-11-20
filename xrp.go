@@ -20,8 +20,7 @@ func XRPDecodeToBytes(input string) ([]byte, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "base58 decode error")
 	}
-	// strip checksum
-	return decoded[:len(decoded)-4], nil
+	return decoded, nil
 }
 
 // XRPEncodeToString converts the input byte array to a string representation of the XRP address.

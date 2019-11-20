@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+const (
+	// Default alphabet, used e.g. by Bitcoin
+	Base58DefaultAlphabet = 
+	   "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+)
+
 var bigRadix = big.NewInt(58)
 var bigZero = big.NewInt(0)
 
@@ -45,16 +51,20 @@ func Base58Decode(b, alphabet string) ([]byte, error) {
 	copy(val[numZeros:], tmpval)
 
 	// Check checksum
-	checksum := doubleSha256(val[0 : len(val)-4])
-	expected := val[len(val)-4:]
+	checksum := doubleSha256(val[: len(val) - 4])
+	expected := val[len(val) - 4:]
 	if !bytes.Equal(checksum[0:4], expected) {
 		return nil, fmt.Errorf("Bad Base58 checksum: %v expected %v", checksum, expected)
 	}
-	return val, nil
+	// strip checksum
+	return val[:len(val) - 4], nil
 }
 
 // Base58Encode encodes a byte slice to a modified base58 string.
 func Base58Encode(b []byte, alphabet string) string {
+	if b == nil || len(b) == 0 {
+		return ""
+	}
 	checksum := doubleSha256(b)
 	b = append(b, checksum[0:4]...)
 	x := new(big.Int)
