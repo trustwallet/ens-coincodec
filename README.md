@@ -5,7 +5,7 @@
 [![GoDoc](https://godoc.org/github.com/trustwallet/ens-coincodec?status.svg)](https://godoc.org/github.com/trustwallet/ens-coincodec)
 [![Build Status](https://travis-ci.org/trustwallet/ens-coincodec.svg?branch=master)](https://travis-ci.org/trustwallet/ens-coincodec)
 [![codecov.io](https://img.shields.io/codecov/c/github/trustwallet/ens-coincodec.svg)](https://codecov.io/github/trustwallet/ens-coincodec)
-[![Go Report](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)
+[![Go Report](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)](https://goreportcard.com/report/github.com/trustwallet/ens-coincodec)
 
 Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats, mainly for ENS.
 
