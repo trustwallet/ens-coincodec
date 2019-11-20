@@ -1,4 +1,4 @@
-# go-coincodec
+# ens-coincodec
 
 [![Tag](https://img.shields.io/github/tag/trustwallet/ens-coincodec.svg)](https://github.com/trustwallet/ens-coincodec/releases/)
 [![License](https://img.shields.io/github/license/trustwallet/ens-coincodec.svg)](LICENSE)
@@ -14,13 +14,12 @@ Go utility library to provide movement between string and binary representation 
 
 - [Install](#install)
 - [Usage](#usage)
-- [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
 
 ## Install
 
-`go-coincodec` is a standard Go module which can be installed with:
+`ens-coincodec` is a standard Go module which can be installed with:
 
 ```sh
 go get github.com/trustwallet/ens-coincodec
