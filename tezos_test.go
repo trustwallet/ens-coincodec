@@ -32,6 +32,21 @@ func TestTezosDecodeToBytes(t *testing.T) {
 			output: "06a1a461af383a78291ace2dea59d3da6c9a8b1cdb1b96",
 		},
 		{
+			name:  "Too short",
+			input: "4cdW",
+			err:   errors.New("Base58 string too short"),
+		},
+		{
+			name:  "Too short, len 5 but decoded len is only 3",
+			input: "21111",
+			err:   errors.New("Base58 string too short"),
+		},
+		{
+			name:  "Valid prefix, too short",
+			input: "4cdWcRbbour5VffJdQuSCNG",
+			err:   errors.New("Invalid length"),
+		},
+		{
 			name:  "Invalid prefix, valid checksum",
 			input: "NmH7tmeJUmHcncBDvpr7aJNEBk7rp5zYsB1qt",
 			err:   errors.New("Invalid prefix"),
@@ -69,6 +84,7 @@ func TestTezosDecodeToBytes(t *testing.T) {
 func TestTezosEncodeToString(t *testing.T) {
 	keyhash, _ := hex.DecodeString("06a19f8fb5cea62d147c696afd9a93dbce962f4c8a9c91")
 	keyhash2, _ := hex.DecodeString("06a1a1a7f2ff4762f8f26aac80221d73be67709dea1d14")
+	keyhash3, _ := hex.DecodeString("06a1a1a7f2ff4762")
 
 	tests := []struct {
 		name   string
@@ -84,6 +100,11 @@ func TestTezosEncodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: []byte{},
+			err:   errors.New("Invalid decoded address length"),
+		},
+		{
+			name:  "Empty",
+			input: keyhash3,
 			err:   errors.New("Invalid decoded address length"),
 		},
 		{
