@@ -16,7 +16,7 @@ func init() {
 
 // XRPDecodeToBytes converts the input string to a byte array
 func XRPDecodeToBytes(input string) ([]byte, error) {
-	decoded, err := Base58Decode(input, xrpAlphabet)
+	decoded, err := Base58ChecksumDecode(input, xrpAlphabet)
 	if err != nil {
 		return nil, errors.Wrap(err, "base58 decode error")
 	}
@@ -25,5 +25,5 @@ func XRPDecodeToBytes(input string) ([]byte, error) {
 
 // XRPEncodeToString converts the input byte array to a string representation of the XRP address.
 func XRPEncodeToString(bytes []byte) (string, error) {
-	return Base58Encode(bytes, xrpAlphabet), nil
+	return Base58ChecksumEncode(bytes, xrpAlphabet), nil
 }

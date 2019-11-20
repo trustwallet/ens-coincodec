@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"reflect"
 	"testing"
+	"strings"
 
 	"github.com/pkg/errors"
 )
@@ -33,17 +34,17 @@ func TestTezosDecodeToBytes(t *testing.T) {
 		{
 			name:  "Invalid prefix, valid checksum",
 			input: "NmH7tmeJUmHcncBDvpr7aJNEBk7rp5zYsB1qt",
-			output: "a1069f88226e21ee0e4f0eda850d6d28c2ec992c3d9dfe",
+			err:   errors.New("Invalid prefix"),
 		},
 		{
 			name:  "Valid prefix, invalid checksum",
 			input: "tz1eZwq8b5cvE2bPKokatLkVMzkxz24z3AAAA",
-			err:   errors.New("Bad Base58 checksum: [158 75 81 137 45 108 126 36 221 126 132 242 217 189 40 8 103 58 112 225 175 69 246 127 65 144 45 244 240 65 32 147] expected [52 175 46 191]"),
+			err:   errors.New("Bad Base58 checksum: "),
 		},
 		{
 			name:  "Invalid prefix, invalid checksum",
 			input: "1tzeZwq8b5cvE2bPKokatLkVMzkxz24zAAAAA",
-			err:   errors.New("Bad Base58 checksum: [165 203 237 246 198 234 235 145 5 193 229 5 152 68 252 22 56 193 215 76 132 138 239 45 248 112 249 192 35 164 195 55] expected [57 103 234 47]"),
+			err:   errors.New("Bad Base58 checksum: "),
 		},
 	}
 	for _, tt := range tests {
@@ -52,7 +53,7 @@ func TestTezosDecodeToBytes(t *testing.T) {
 			if tt.err != nil {
 				goterror := "(no error)"
 				if err != nil { goterror = err.Error() }
-				if goterror != tt.err.Error() {
+				if !strings.HasPrefix(goterror, tt.err.Error()) {
 					t.Errorf("TezosDecodeToBytes() error = %v, wantErr %v", err, tt.err)
 					return
 				}
