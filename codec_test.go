@@ -33,7 +33,7 @@ func TestToBytes(t *testing.T) {
 			name:     "Empty",
 			input:    "",
 			coinType: slip44.ETHER,
-			err:      errors.New("no input"),
+			err:      errors.New("empty input"),
 		},
 		{
 			name:     "Unknown",
@@ -84,13 +84,13 @@ func TestToString(t *testing.T) {
 			name:     "Nil",
 			input:    nil,
 			coinType: slip44.ETHER,
-			err:      errors.New("no input"),
+			err:      errors.New("empty input"),
 		},
 		{
 			name:     "Empty",
 			input:    []byte{},
 			coinType: slip44.ETHER,
-			err:      errors.New("no input"),
+			err:      errors.New("empty input"),
 		},
 		{
 			name:     "Unknown",
