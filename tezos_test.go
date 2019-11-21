@@ -1,21 +1,14 @@
 package coincodec
 
 import (
-	"encoding/hex"
-	"reflect"
 	"testing"
-	"strings"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
-func TestTezosDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestTezosEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "Normal",
 			input:  "tz1Yju7jmmsaUiG9qQLoYv35v5pHgnWoLWbt",
@@ -62,44 +55,19 @@ func TestTezosDecodeToBytes(t *testing.T) {
 			err:   errors.New("Bad Base58 checksum: "),
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := TezosDecodeToBytes(tt.input)
-			if tt.err != nil {
-				goterror := "(no error)"
-				if err != nil { goterror = err.Error() }
-				if !strings.HasPrefix(goterror, tt.err.Error()) {
-					t.Errorf("TezosDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("TezosDecodeToBytes() = %v, want %v", hex.EncodeToString(got), tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.TEZOS, tests)
 }
 
-func TestTezosEncodeToString(t *testing.T) {
-	keyhash, _ := hex.DecodeString("06a19f8fb5cea62d147c696afd9a93dbce962f4c8a9c91")
-	keyhash2, _ := hex.DecodeString("06a1a1a7f2ff4762f8f26aac80221d73be67709dea1d14")
-	keyhash3, _ := hex.DecodeString("06a1a1a7f2ff4762")
+func TestTezosDecodeToString(t *testing.T) {
+	keyhash := "06a19f8fb5cea62d147c696afd9a93dbce962f4c8a9c91"
+	keyhash2 := "06a1a1a7f2ff4762f8f26aac80221d73be67709dea1d14"
+	keyhash3 := "06a1a1a7f2ff4762"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
-		{
-			name:  "Nil",
-			input: nil,
-			err:   errors.New("Invalid decoded address length"),
-		},
+	tests := []TestcaseDecode {
 		{
 			name:  "Empty",
-			input: []byte{},
+			input: "",
 			err:   errors.New("Invalid decoded address length"),
 		},
 		{
@@ -118,21 +86,6 @@ func TestTezosEncodeToString(t *testing.T) {
 			output: "tz2PdGc7U5tiyqPgTSgqCDct94qd6ovQwP6u",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := TezosEncodeToString(tt.input)
-			if tt.err != nil {
-				goterror := "(no error)"
-				if err != nil { goterror = err.Error() }
-				if goterror != tt.err.Error() {
-					t.Errorf("TezosEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("TezosEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.TEZOS, tests)
 }
