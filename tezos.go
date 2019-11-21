@@ -1,8 +1,8 @@
 package coincodec
 
 import (
-	"errors"
 	"bytes"
+	"errors"
 	"github.com/wealdtech/go-slip44"
 )
 
@@ -32,15 +32,15 @@ func TezosDecodeToBytes(input string) ([]byte, error) {
 	}
 	// prefix check
 	prefix := decoded[0:3]
-	if (!bytes.Equal(prefix, tz1Prefix) &&
+	if !bytes.Equal(prefix, tz1Prefix) &&
 		!bytes.Equal(prefix, tz2Prefix) &&
-		!bytes.Equal(prefix, tz3Prefix)) {
+		!bytes.Equal(prefix, tz3Prefix) {
 		return nil, errors.New("Invalid prefix")
 	}
 	return decoded, nil
 }
 
-// TezosEncodeToString converts the input byte array to a string representation of the Cosmos address.
+// TezosEncodeToString converts the input byte array to a string representation of the Tezos address.
 func TezosEncodeToString(bytes []byte) (string, error) {
 	if len(bytes) != TezosAddressLength {
 		return "", errors.New("Invalid decoded address length")
