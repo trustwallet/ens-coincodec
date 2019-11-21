@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	AddressLength = 23
+	TezosAddressLength = 23
 )
 
 var (
@@ -27,7 +27,7 @@ func TezosDecodeToBytes(input string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if len(decoded) != AddressLength {
+	if len(decoded) != TezosAddressLength {
 		return nil, errors.New("Invalid length")
 	}
 	// prefix check
@@ -42,7 +42,7 @@ func TezosDecodeToBytes(input string) ([]byte, error) {
 
 // TezosEncodeToString converts the input byte array to a string representation of the Cosmos address.
 func TezosEncodeToString(bytes []byte) (string, error) {
-	if len(bytes) != AddressLength {
+	if len(bytes) != TezosAddressLength {
 		return "", errors.New("Invalid decoded address length")
 	}
 	encoded := Base58ChecksumEncode(bytes, Base58DefaultAlphabet)
