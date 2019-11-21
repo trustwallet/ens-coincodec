@@ -1,20 +1,14 @@
 package coincodec
 
 import (
-	"encoding/hex"
-	"reflect"
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
-func TestCosmosDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestCosmosEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "Normal",
 			input:  "cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02",
@@ -41,41 +35,23 @@ func TestCosmosDecodeToBytes(t *testing.T) {
 			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := CosmosDecodeToBytes(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("CosmosDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("CosmosDecodeToBytes() = %v, want %v", hex.EncodeToString(got), tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.ATOM, tests)
 }
 
-func TestCosmosEncodeToString(t *testing.T) {
-	keyhash, _ := hex.DecodeString("bc2da90c84049370d1b7c528bc164bc588833f21")
-	keyhash2, _ := hex.DecodeString("6e436a571cec916167ba105160474b9c9cd132bd")
+func TestCosmosDecodeToString(t *testing.T) {
+	keyhash := "bc2da90c84049370d1b7c528bc164bc588833f21"
+	keyhash2 := "6e436a571cec916167ba105160474b9c9cd132bd"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
-			name:  "Nil",
-			input: nil,
+			name:  "Empty",
+			input: "",
 			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
-			name:  "Empty",
-			input: []byte{},
+			name:  "Too short",
+			input: "0102030405",
 			err:   errors.New("A Bech32 address key hash must be 20 bytes"),
 		},
 		{
@@ -89,19 +65,6 @@ func TestCosmosEncodeToString(t *testing.T) {
 			output: "cosmos1depk54cuajgkzea6zpgkq36tnjwdzv4afc3d27",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := CosmosEncodeToString(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("CosmosEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("CosmosEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.ATOM, tests)
 }

@@ -1,20 +1,14 @@
 package coincodec
 
 import (
-	"encoding/hex"
-	"reflect"
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
-func TestBitcoinDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestBitcoinEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
@@ -61,48 +55,25 @@ func TestBitcoinDecodeToBytes(t *testing.T) {
 			err:   errors.New("decoding bech32 failed: invalid index of 1"),
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinDecodeToBytes(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.BITCOIN, tests)
 }
 
-func TestBitcoinEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac")
-	script2, _ := hex.DecodeString("a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1887")
-	script3, _ := hex.DecodeString("0014751e76e8199196d454941c45d1b3a323f1433bd6")
-	script4, _ := hex.DecodeString("00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262")
+func TestBitcoinDecodeToString(t *testing.T) {
+	script1 := "76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac"
+	script2 := "a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1887"
+	script3 := "0014751e76e8199196d454941c45d1b3a323f1433bd6"
+	script4 := "00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
-		{
-			name:  "Nil",
-			input: nil,
-			err:   errors.New("invalid data length"),
-		},
+	tests := []TestcaseDecode {
 		{
 			name:  "Empty",
-			input: []byte{},
+			input: "",
 			err:   errors.New("invalid data length"),
 		},
 		{
 			name:  "Wrong script",
-			input: []byte{0x00, 0x14, 0x01, 0x2},
+			input: "00140102",
 			err:   errors.New("wrong script data"),
 		},
 		{
@@ -126,19 +97,6 @@ func TestBitcoinEncodeToString(t *testing.T) {
 			output: "bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := BitcoinEncodeToString(tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.BITCOIN, tests)
 }

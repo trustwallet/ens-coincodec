@@ -1,21 +1,14 @@
 package coincodec
 
 import (
-	"encoding/hex"
-	"reflect"
 	"testing"
 
 	"github.com/pkg/errors"
 	"github.com/wealdtech/go-slip44"
 )
 
-func TestLitecoinDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestLitecoinEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "LaMT348PWRnrqeeWArpwQPbuanpXDZGEUz",
@@ -32,34 +25,16 @@ func TestLitecoinDecodeToBytes(t *testing.T) {
 			output: "0014687c150c26af5493befeed7036043812115ca36c",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.LITECOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.LITECOIN, tests)
 }
 
-func TestLitecoinEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a914a5f4d12ce3685781b227c1f39548ddef429e978388ac")
-	script2, _ := hex.DecodeString("a914b48297bff5dadecc5f36145cec6a5f20d57c8f9b87")
-	script3, _ := hex.DecodeString("0014687c150c26af5493befeed7036043812115ca36c")
+func TestLitecoinDecodeToString(t *testing.T) {
+	script1 := "76a914a5f4d12ce3685781b227c1f39548ddef429e978388ac"
+	script2 := "a914b48297bff5dadecc5f36145cec6a5f20d57c8f9b87"
+	script3 := "0014687c150c26af5493befeed7036043812115ca36c"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -76,30 +51,12 @@ func TestLitecoinEncodeToString(t *testing.T) {
 			output: "ltc1qdp7p2rpx4a2f80h7a4crvppczgg4egmv5c78w8",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.LITECOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.LITECOIN, tests)
 }
 
-func TestDogeDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestDogeEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "DBXu2kgc3xtvCUWFcxFE3r9hEYgmuaaCyD",
@@ -111,33 +68,15 @@ func TestDogeDecodeToBytes(t *testing.T) {
 			output: "a914f8f5d99a9fc21aa676e74d15e7b8134557615bda87",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.DOGECOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.DOGECOIN, tests)
 }
 
-func TestDogeEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a9144620b70031f0e9437e374a2100934fba4911046088ac")
-	script2, _ := hex.DecodeString("a914f8f5d99a9fc21aa676e74d15e7b8134557615bda87")
+func TestDogeDecodeToString(t *testing.T) {
+	script1 := "76a9144620b70031f0e9437e374a2100934fba4911046088ac"
+	script2 := "a914f8f5d99a9fc21aa676e74d15e7b8134557615bda87"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -149,30 +88,12 @@ func TestDogeEncodeToString(t *testing.T) {
 			output: "AF8ekvSf6eiSBRspJjnfzK6d1EM6pnPq3G",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.DOGECOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.DOGECOIN, tests)
 }
 
-func TestDashDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestDashEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "XtAG1982HcYJVibHxRZrBmdzL5YTzj4cA1",
@@ -189,33 +110,15 @@ func TestDashDecodeToBytes(t *testing.T) {
 			err:   errors.New("invalid format: version and/or checksum bytes missing"),
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.DASH](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.DASH, tests)
 }
 
-func TestDashEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a914bfa98bb8a919330c432e4ff16563c5ab449604ad88ac")
-	script2, _ := hex.DecodeString("a9149d646d71f0815c0cfd8cd08aa9d391cd127f378687")
+func TestDashDecodeToString(t *testing.T) {
+	script1 := "76a914bfa98bb8a919330c432e4ff16563c5ab449604ad88ac"
+	script2 := "a9149d646d71f0815c0cfd8cd08aa9d391cd127f378687"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -227,30 +130,12 @@ func TestDashEncodeToString(t *testing.T) {
 			output: "7gks9gWVmGeir7m4MhsSxMzXC2eXXAuuRD",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.DASH](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.DASH, tests)
 }
 
-func TestMonaDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestMonaEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "MHxgS2XMXjeJ4if2PRRbWYcdwZPWfdwaDT",
@@ -267,34 +152,16 @@ func TestMonaDecodeToBytes(t *testing.T) {
 			output: "0014751e76e8199196d454941c45d1b3a323f1433bd6",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.MONACOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.MONACOIN, tests)
 }
 
-func TestMonaEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a9146e5bb7226a337fe8307b4192ae5c3fab9fa9edf588ac")
-	script2, _ := hex.DecodeString("a9146449f568c9cd2378138f2636e1567112a184a9e887")
-	script3, _ := hex.DecodeString("0014751e76e8199196d454941c45d1b3a323f1433bd6")
+func TestMonaDecodeToString(t *testing.T) {
+	script1 := "76a9146e5bb7226a337fe8307b4192ae5c3fab9fa9edf588ac"
+	script2 := "a9146449f568c9cd2378138f2636e1567112a184a9e887"
+	script3 := "0014751e76e8199196d454941c45d1b3a323f1433bd6"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -311,30 +178,12 @@ func TestMonaEncodeToString(t *testing.T) {
 			output: "mona1qw508d6qejxtdg4y5r3zarvary0c5xw7kg5lnx5",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.MONACOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.MONACOIN, tests)
 }
 
-func TestQtumDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestQtumEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "QYJHEEt8kS8TzUuCy1ia7aYe1cpNg4QYnn",
@@ -351,34 +200,16 @@ func TestQtumDecodeToBytes(t *testing.T) {
 			output: "00143420312df19e36fe37af531a75f183b3f282b862",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.QTUM](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.QTUM, tests)
 }
 
-func TestQtumEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a91480485018e46a9c8176282adf0acb4ff3e0de93ff88ac")
-	script2, _ := hex.DecodeString("a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987")
-	script3, _ := hex.DecodeString("00143420312df19e36fe37af531a75f183b3f282b862")
+func TestQtumDecodeToString(t *testing.T) {
+	script1 := "76a91480485018e46a9c8176282adf0acb4ff3e0de93ff88ac"
+	script2 := "a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987"
+	script3 := "00143420312df19e36fe37af531a75f183b3f282b862"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -395,30 +226,12 @@ func TestQtumEncodeToString(t *testing.T) {
 			output: "qc1qxssrzt03ncm0uda02vd8tuvrk0eg9wrz8qm2qe",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.QTUM](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.QTUM, tests)
 }
 
-func TestVIADecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestVIAEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "Vw6bJFaF5Hyiveko7dpqRjVvcTAsjz7eYa",
@@ -435,34 +248,16 @@ func TestVIADecodeToBytes(t *testing.T) {
 			output: "001484542436f952c22c4c54a0fcd2c997c66317ea30",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.VIACOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.VIACOIN, tests)	
 }
 
-func TestVIAEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a914e771c6695c5dd189ccc4ef00cd0f3db3096d79bd88ac")
-	script2, _ := hex.DecodeString("a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987")
-	script3, _ := hex.DecodeString("001484542436f952c22c4c54a0fcd2c997c66317ea30")
+func TestVIADecodeToString(t *testing.T) {
+	script1 := "76a914e771c6695c5dd189ccc4ef00cd0f3db3096d79bd88ac"
+	script2 := "a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987"
+	script3 := "001484542436f952c22c4c54a0fcd2c997c66317ea30"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -479,30 +274,12 @@ func TestVIAEncodeToString(t *testing.T) {
 			output: "via1qs32zgdhe2tpzcnz55r7d9jvhce33063s8w4xre",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.VIACOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.VIACOIN, tests)
 }
 
-func TestDigiByteDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestDigiByteEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "DBfCffUdSbhqKZhjuvrJ6AgvJofT4E2kp4",
@@ -519,34 +296,16 @@ func TestDigiByteDecodeToBytes(t *testing.T) {
 			output: "0014885534ab5dc680b68d95c0af49ec2acc2e9915c4",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.DIGIBYTE](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.DIGIBYTE, tests)	
 }
 
-func TestDigiByteEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a91447825943ca6a936b177fdc7c9dc05251640169c288ac")
-	script2, _ := hex.DecodeString("a91452356ed3d2d31eb8b263ace5d164e3cf3b37096687")
-	script3, _ := hex.DecodeString("0014885534ab5dc680b68d95c0af49ec2acc2e9915c4")
+func TestDigiByteDecodeToString(t *testing.T) {
+	script1 := "76a91447825943ca6a936b177fdc7c9dc05251640169c288ac"
+	script2 := "a91452356ed3d2d31eb8b263ace5d164e3cf3b37096687"
+	script3 := "0014885534ab5dc680b68d95c0af49ec2acc2e9915c4"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -563,30 +322,12 @@ func TestDigiByteEncodeToString(t *testing.T) {
 			output: "dgb1q3p2nf26ac6qtdrv4czh5nmp2eshfj9wyn9vv3d",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.DIGIBYTE](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.DIGIBYTE, tests)
 }
 
-func TestZcoinDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestZcoinEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "a4YtT82mWWxHZhLmdx7e5aroW92dqJoRs3",
@@ -598,33 +339,15 @@ func TestZcoinDecodeToBytes(t *testing.T) {
 			output: "a914f010b17a9189e0f2737d71ae9790359eb5bbc13787",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.ZCOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.ZCOIN, tests)
 }
 
-func TestZcoinEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a9142a10f88e30768d2712665c279922b9621ce58bc788ac")
-	script2, _ := hex.DecodeString("a914f010b17a9189e0f2737d71ae9790359eb5bbc13787")
+func TestZcoinDecodeToString(t *testing.T) {
+	script1 := "76a9142a10f88e30768d2712665c279922b9621ce58bc788ac"
+	script2 := "a914f010b17a9189e0f2737d71ae9790359eb5bbc13787"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -636,30 +359,12 @@ func TestZcoinEncodeToString(t *testing.T) {
 			output: "4CFa4fnAQvFz4VpikGNzQ9XfCDXMmdk6sh",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.ZCOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.ZCOIN, tests)
 }
 
-func TestRavenDecodeToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output string
-		err    error
-	}{
+func TestRavenEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode {
 		{
 			name:   "P2PKH",
 			input:  "RNoSGCX8SPFscj8epDaJjqEpuZa2B5in88",
@@ -671,33 +376,15 @@ func TestRavenDecodeToBytes(t *testing.T) {
 			output: "a914bd92088bb7e82d611a9b94fbb74a0908152b784f87",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toBytesMap[slip44.RAVENCOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinDecodeToBytes() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if !reflect.DeepEqual(hex.EncodeToString(got), tt.output) {
-					t.Errorf("BitcoinDecodeToBytes() = %v, want %v, err: %v", hex.EncodeToString(got), tt.output, tt.err)
-				}
-			}
-		})
-	}
+
+	RunTestsEncode(t, slip44.RAVENCOIN, tests)
 }
 
-func TestRavenEncodeToString(t *testing.T) {
-	script1, _ := hex.DecodeString("76a9149451f4546e09fc2e49ef9b5303924712ec2b038e88ac")
-	script2, _ := hex.DecodeString("a914bd92088bb7e82d611a9b94fbb74a0908152b784f87")
+func TestRavenDecodeToString(t *testing.T) {
+	script1 := "76a9149451f4546e09fc2e49ef9b5303924712ec2b038e88ac"
+	script2 := "a914bd92088bb7e82d611a9b94fbb74a0908152b784f87"
 
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -709,19 +396,6 @@ func TestRavenEncodeToString(t *testing.T) {
 			output: "rPWwn5h4QFZNaz1XmY39rc73sdYGGDdmq1",
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := toStringMap[slip44.RAVENCOIN](tt.input)
-			if tt.err != nil {
-				if err.Error() != tt.err.Error() {
-					t.Errorf("BitcoinEncodeToString() error = %v, wantErr %v", err, tt.err)
-					return
-				}
-			} else {
-				if got != tt.output {
-					t.Errorf("BitcoinEncodeToString() = %v, want %v", got, tt.output)
-				}
-			}
-		})
-	}
+
+	RunTestsDecode(t, slip44.RAVENCOIN, tests)
 }

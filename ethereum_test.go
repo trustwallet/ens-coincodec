@@ -14,18 +14,14 @@
 package coincodec
 
 import (
-	"bytes"
 	"errors"
 	"testing"
+
+	"github.com/wealdtech/go-slip44"
 )
 
 func TestEtherToBytes(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  string
-		output []byte
-		err    error
-	}{
+	tests := []TestcaseEncode {
 		{
 			name:  "Empty",
 			input: "",
@@ -64,76 +60,31 @@ func TestEtherToBytes(t *testing.T) {
 		{
 			name:   "Good",
 			input:  "0x0102030405060708090a0B0c0d0e0f1011121314",
-			output: []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14},
+			output: "0102030405060708090a0b0c0d0e0f1011121314",
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			output, err := EtherToBytes(test.input)
-			if test.err != nil {
-				if err == nil {
-					t.Fatalf("Missing expected error: expected %v", test.err)
-				}
-				if test.err.Error() != err.Error() {
-					t.Fatalf("Unexpected error value: expected %v, received %v", test.err, err)
-				}
-			} else {
-				if err != nil {
-					t.Fatalf("Unexpected error: %v", err)
-				}
-				if !bytes.Equal(test.output, output) {
-					t.Fatalf("Unexpected output: expected %x, received %x", test.output, output)
-				}
-			}
-		})
-
-	}
+	RunTestsEncode(t, slip44.ETHER, tests)
 }
 
 func TestEtherToString(t *testing.T) {
-	tests := []struct {
-		name   string
-		input  []byte
-		output string
-		err    error
-	}{
+	tests := []TestcaseDecode {
 		{
-			name:  "Nil",
-			input: nil,
+			name:  "Empty",
+			input: "",
 			err:   errors.New("Ethereum address must have 20 bytes"),
 		},
 		{
-			name:  "Empty",
-			input: []byte{},
+			name:  "Too short",
+			input: "0102030405",
 			err:   errors.New("Ethereum address must have 20 bytes"),
 		},
 		{
 			name:   "Good",
-			input:  []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14},
+			input: "0102030405060708090a0b0c0d0e0f1011121314",
 			output: "0x0102030405060708090a0B0c0d0e0f1011121314",
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			output, err := EtherToString(test.input)
-			if test.err != nil {
-				if err == nil {
-					t.Fatalf("Missing expected error: expected %v", test.err)
-				}
-				if test.err.Error() != err.Error() {
-					t.Fatalf("Unexpected error value: expected %v, received %v", test.err, err)
-				}
-			} else {
-				if err != nil {
-					t.Fatalf("Unexpected error: %v", err)
-				}
-				if test.output != output {
-					t.Fatalf("Unexpected output: expected %x, received %x", test.output, output)
-				}
-			}
-		})
-
-	}
+	RunTestsDecode(t, slip44.ETHER, tests)
 }
