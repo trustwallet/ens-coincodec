@@ -8,7 +8,7 @@ import (
 )
 
 func TestTezosEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "tz1Yju7jmmsaUiG9qQLoYv35v5pHgnWoLWbt",
@@ -64,7 +64,7 @@ func TestTezosDecodeToString(t *testing.T) {
 	keyhash2 := "06a1a1a7f2ff4762f8f26aac80221d73be67709dea1d14"
 	keyhash3 := "06a1a1a7f2ff4762"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
