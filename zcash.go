@@ -7,7 +7,9 @@ import (
 
 const (
 	ZCashAddressLength = 22
-	ZCashStaticPrefix = 0x1c
+	ZCashStaticPrefix = 0x1C // 28
+	ZCashPrefixP2pkh = 0xB8 // 184
+	ZCashPrefixP2sh = 0xBD // 189
 )
 
 func init() {
@@ -21,22 +23,36 @@ func ZCashDecodeToBytes(input string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if len(decoded) != ZCashAddressLength {
-		return nil, errors.New("Invalid length")
-	}
-	// prefix check (t1, t3): first byte is constant, enforced; second has a few valid values, not checked here 
-	staticPrefix := decoded[0]
-	if staticPrefix != ZCashStaticPrefix {
-		return nil, errors.New("Invalid static prefix")
+	err = checkIsValid(decoded)
+	if err != nil {
+		return nil, err
 	}
 	return decoded, nil
 }
 
 // ZCashEncodeToString converts the input byte array to a string representation of the ZCash address.
 func ZCashEncodeToString(bytes []byte) (string, error) {
-	if len(bytes) != ZCashAddressLength {
-		return "", errors.New("Invalid decoded address length")
+	err := checkIsValid(bytes)
+	if err != nil {
+		return "", err
 	}
 	encoded := Base58ChecksumEncode(bytes, Base58DefaultAlphabet)
 	return encoded, nil
+}
+
+// Check for correct length and prefix
+func checkIsValid(bytes []byte) (error) {
+	if len(bytes) != ZCashAddressLength {
+		return errors.New("Invalid length")
+	}
+	// prefix check: first byte is constant; second has two valid values 
+	staticPrefix := bytes[0]
+	prefix := bytes[1]
+	if staticPrefix != ZCashStaticPrefix {
+		return errors.New("Invalid static prefix")
+	}
+	if prefix != ZCashPrefixP2pkh && prefix != ZCashPrefixP2sh {
+		return errors.New("Invalid prefix")
+	}
+	return nil
 }
