@@ -24,7 +24,7 @@ func ZCashDecodeToBytes(input string) ([]byte, error) {
 	if len(decoded) != ZCashAddressLength {
 		return nil, errors.New("Invalid length")
 	}
-	// prefix check
+	// prefix check (t1, t3): first byte is constant, enforced; second has a few valid values, not checked here 
 	staticPrefix := decoded[0]
 	if staticPrefix != ZCashStaticPrefix {
 		return nil, errors.New("Invalid static prefix")

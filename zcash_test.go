@@ -20,6 +20,11 @@ func TestZCashEncodeToBytes(t *testing.T) {
 			output: "1cb869bf38acef973293c07f05c778eb1209748e8d52",
 		},
 		{
+			name:   "Normal3",
+			input:  "t31sVS92QoGM1ZAF9WeAcdCdMmhQNwwJLYP",
+			output: "1cbc48e71790e51ab7558c05a6067cfc4926aa8c44dd",
+		},
+		{
 			name:  "Invalid Base58",
 			input: "t1RygJmrLdNGgi98+UgEJDTVaELTAYWoMBy",
 			err:   errors.New("Bad Base58 string"),
