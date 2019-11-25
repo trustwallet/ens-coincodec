@@ -21,8 +21,8 @@ func TestZCashEncodeToBytes(t *testing.T) {
 		},
 		{
 			name:   "Normal3",
-			input:  "t31sVS92QoGM1ZAF9WeAcdCdMmhQNwwJLYP",
-			output: "1cbc48e71790e51ab7558c05a6067cfc4926aa8c44dd",
+			input:  "t3RD6RFKhWSotNbPEY4Vw7Ku9QCfKkzrbBL",
+			output: "1cbd48e71790e51ab7558c05a6067cfc4926aa8c44dd",
 		},
 		{
 			name:  "Invalid Base58",
@@ -59,12 +59,12 @@ func TestZCashDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid length"),
 		},
 		{
-			name:  "Empty",
+			name:  "Short",
 			input: "06a1a1a7f2ff4762",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid length"),
 		},
 		{
 			name:   "Good",
