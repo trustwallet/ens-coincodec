@@ -20,8 +20,6 @@ Go utility library to provide movement between string and binary representation 
 
 ## Coins
 
-#### Supported Coins
-
 <a href="https://bitcoin.org" target="_blank"><img src="https://raw.githubusercontent.com/TrustWallet/tokens/master/coins/0.png" width="32" /></a>
 <a href="https://litecoin.org" target="_blank"><img src="https://raw.githubusercontent.com/TrustWallet/tokens/master/coins/2.png" width="32" /></a>
 <a href="https://dogecoin.com" target="_blank"><img src="https://raw.githubusercontent.com/TrustWallet/tokens/master/coins/3.png" width="32" /></a>
