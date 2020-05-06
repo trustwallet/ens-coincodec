@@ -3,7 +3,7 @@
 [![Tag](https://img.shields.io/github/tag/trustwallet/ens-coincodec.svg)](https://github.com/trustwallet/ens-coincodec/releases/)
 [![License](https://img.shields.io/github/license/trustwallet/ens-coincodec.svg)](LICENSE)
 [![GoDoc](https://godoc.org/github.com/trustwallet/ens-coincodec?status.svg)](https://godoc.org/github.com/trustwallet/ens-coincodec)
-[![Build Status](https://travis-ci.org/trustwallet/ens-coincodec.svg?branch=master)](https://travis-ci.org/trustwallet/ens-coincodec)
+![CI](https://github.com/trustwallet/ens-coincodec/workflows/CI/badge.svg)
 [![codecov.io](https://img.shields.io/codecov/c/github/trustwallet/ens-coincodec.svg)](https://codecov.io/github/trustwallet/ens-coincodec)
 [![Go Report](https://goreportcard.com/badge/github.com/trustwallet/ens-coincodec)](https://goreportcard.com/report/github.com/trustwallet/ens-coincodec)
 
