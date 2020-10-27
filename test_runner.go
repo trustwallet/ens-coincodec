@@ -33,15 +33,19 @@ func RunTestsEncode(t *testing.T, coinType uint32, tests []TestcaseEncode) {
 	}
 }
 
+func errorString(err error) string {
+	if err != nil {
+		return err.Error()
+	}
+	return "(no error)"
+}
+
 func RunTestEncode(coinType uint32, tt TestcaseEncode) error {
 	testfun, _ := toBytesMap[coinType]
 
 	got, err := testfun(tt.input)
 
-	var goterror string = "(no error)"
-	if err != nil {
-		goterror = err.Error()
-	}
+	goterror := errorString(err)
 	if tt.err != nil {
 		if !strings.HasPrefix(goterror, tt.err.Error()) {
 			return fmt.Errorf("%v %v: ToBytes() error = %v, wantErr %v", coinType, tt.name, goterror, tt.err)
@@ -75,10 +79,7 @@ func RunTestDecode(coinType uint32, tt TestcaseDecode) error {
 
 	got, err := testfun(decoded)
 
-	var goterror string = "(no error)"
-	if err != nil {
-		goterror = err.Error()
-	}
+	goterror := errorString(err)
 	if tt.err != nil {
 		if goterror != tt.err.Error() {
 			return fmt.Errorf("%v %v: ToString() error = %v, wantErr %v", coinType, tt.name, goterror, tt.err)
