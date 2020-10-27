@@ -20,6 +20,11 @@ func TestPolkadotEncodeToBytes(t *testing.T) {
 			output: "b84b605a51045e43740bc74db62d0077ff9d971e49d588f9b307915721bb3251",
 		},
 		{
+			name:   "Normal3 from ensdomains/address-encoder",
+			input:  "1FRMM8PEiWXYax7rpS6X4XZX1aAAxSWx1CrKTyrVYhV24fg",
+			output: "0aff6865635ae11013a83835c019d44ec3f865145943f487ae82a8e7bed3a66b",
+		},
+		{
 			name:  "Too short",
 			input: "15KR",
 			err:   errors.New("Base58 string too short"),
@@ -75,6 +80,11 @@ func TestPolkadotDecodeToString(t *testing.T) {
 			name:   "Good2",
 			input:  "b84b605a51045e43740bc74db62d0077ff9d971e49d588f9b307915721bb3251",
 			output: "15AeCjMpcSt3Fwa47jJBd7JzQ395Kr2cuyF5Zp4UBf1g9ony",
+		},
+		{
+			name:   "Good3 from ensdomains/address-encoder",
+			input:  "0aff6865635ae11013a83835c019d44ec3f865145943f487ae82a8e7bed3a66b",
+			output: "1FRMM8PEiWXYax7rpS6X4XZX1aAAxSWx1CrKTyrVYhV24fg",
 		},
 		{
 			name:  "Empty",
