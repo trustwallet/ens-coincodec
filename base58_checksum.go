@@ -17,14 +17,14 @@ func Base58ChecksumDecode(b string, alphabet string) ([]byte, error) {
 	}
 
 	// Check checksum
-	checksum := doubleSha256(val[: len(val) - 4])
-	expected := val[len(val) - 4:]
+	checksum := doubleSha256(val[:len(val)-4])
+	expected := val[len(val)-4:]
 	if !bytes.Equal(checksum[0:4], expected) {
 		return nil, fmt.Errorf("Bad Base58 checksum: %v expected %v", checksum, expected)
 	}
 
 	// strip checksum
-	return val[:len(val) - 4], nil
+	return val[:len(val)-4], nil
 }
 
 // Base58Encode encodes a byte slice to a modified base58 string.

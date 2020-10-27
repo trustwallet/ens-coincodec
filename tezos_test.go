@@ -71,7 +71,7 @@ func TestTezosDecodeToString(t *testing.T) {
 			err:   errors.New("Invalid decoded address length"),
 		},
 		{
-			name:  "Empty",
+			name:  "Short",
 			input: keyhash3,
 			err:   errors.New("Invalid decoded address length"),
 		},
