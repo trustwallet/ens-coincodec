@@ -22,6 +22,13 @@ type TestcaseDecode struct {
 	err    error
 }
 
+func errorString(err error) string {
+	if err != nil {
+		return err.Error()
+	}
+	return "(no error)"
+}
+
 func RunTestsEncode(t *testing.T, coinType uint32, tests []TestcaseEncode) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -31,13 +38,6 @@ func RunTestsEncode(t *testing.T, coinType uint32, tests []TestcaseEncode) {
 			}
 		})
 	}
-}
-
-func errorString(err error) string {
-	if err != nil {
-		return err.Error()
-	}
-	return "(no error)"
 }
 
 func RunTestEncode(coinType uint32, tt TestcaseEncode) error {
