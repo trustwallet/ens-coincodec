@@ -25,16 +25,6 @@ func TestSolanaEncodeToBytes(t *testing.T) {
 			output: "ee93a4f66f8d16b819bb9beb9ffccdfcdc1412e87fee6a324c2a99a1e0e67148",
 		},
 		{
-			name:   "Normal4",
-			input:  "2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpdST",
-			output: "18f9d8d877393bbbe8d697a8a2e52879cc7e84f467656d1cce6bab5a8d2637ec",
-		},
-		{
-			name:   "Normal5",
-			input:  "2bUBiBNZyD29gP1oV6de7nxowMLoDBtopMMTGgMvjG5m",
-			output: "17b02c16bf792e54b606db6c2b10a24647a3e96215f5450186e183f57caaf0d0",
-		},
-		{
 			name:  "Too short",
 			input: "2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpd",
 			err:   errors.New("Invalid length"),
