@@ -6,14 +6,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-func Base58AddressIsValidString(input string, decodedSize int, validPrefixes [][]byte) error {
-	decoded, err := Base58ChecksumDecode(input, Base58DefaultAlphabet)
-	if err != nil {
-		return err
-	}
-	return base58AddressIsValidData(decoded, decodedSize, validPrefixes)
-}
-
 func hasPrefix(data []byte, prefix []byte) bool {
 	if len(data) < len(prefix) {
 		return false
@@ -21,7 +13,14 @@ func hasPrefix(data []byte, prefix []byte) bool {
 	return bytes.Equal(data[:len(prefix)], prefix)
 }
 
-func base58AddressIsValidData(data []byte, decodedSize int, validPrefixes [][]byte) error {
+func base58AddressIsValidData(data []byte, decodedSize int) error {
+	if len(data) != decodedSize {
+		return errors.New("Invalid decoded length")
+	}
+	return nil
+}
+
+func base58AddressIsValidDataPrefix(data []byte, decodedSize int, validPrefixes [][]byte) error {
 	if len(data) != decodedSize {
 		return errors.New("Invalid decoded length")
 	}
@@ -33,12 +32,24 @@ func base58AddressIsValidData(data []byte, decodedSize int, validPrefixes [][]by
 	return errors.New("Invalid prefix")
 }
 
-func Base58AddressDecodeToBytes(input string, decodedSize int, validPrefixes [][]byte) ([]byte, error) {
+func Base58AddressDecodeToBytes(input string, decodedSize int) ([]byte, error) {
 	decoded, err := Base58ChecksumDecode(input, Base58DefaultAlphabet)
 	if err != nil {
 		return nil, err
 	}
-	err = base58AddressIsValidData(decoded, decodedSize, validPrefixes)
+	err = base58AddressIsValidData(decoded, decodedSize)
+	if err != nil {
+		return nil, err
+	}
+	return decoded, nil
+}
+
+func Base58AddressDecodeToBytesPrefix(input string, decodedSize int, validPrefixes [][]byte) ([]byte, error) {
+	decoded, err := Base58ChecksumDecode(input, Base58DefaultAlphabet)
+	if err != nil {
+		return nil, err
+	}
+	err = base58AddressIsValidDataPrefix(decoded, decodedSize, validPrefixes)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +57,7 @@ func Base58AddressDecodeToBytes(input string, decodedSize int, validPrefixes [][
 }
 
 func Base58AddressEncodeToString(data []byte, decodedSize int, validPrefixes [][]byte) (string, error) {
-	err := base58AddressIsValidData(data, decodedSize, validPrefixes)
+	err := base58AddressIsValidDataPrefix(data, decodedSize, validPrefixes)
 	if err != nil {
 		return "", err
 	}

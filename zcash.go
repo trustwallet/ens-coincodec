@@ -24,7 +24,7 @@ func init() {
 
 // ZCashDecodeToBytes converts the input string to a byte array
 func ZCashDecodeToBytes(input string) ([]byte, error) {
-	return Base58AddressDecodeToBytes(input, ZCashAddressLength, zcashPrefixes)
+	return Base58AddressDecodeToBytesPrefix(input, ZCashAddressLength, zcashPrefixes)
 }
 
 // ZCashEncodeToString converts the input byte array to a string representation of the ZCash address.
