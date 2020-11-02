@@ -64,12 +64,12 @@ func TestTronDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Empty",
 			input: "06a1a1a7f2ff4762",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:   "Good",
