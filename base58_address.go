@@ -56,7 +56,7 @@ func Base58AddressDecodeToBytesPrefix(input string, decodedSize int, validPrefix
 	return decoded, nil
 }
 
-func Base58AddressEncodeToString(data []byte, decodedSize int, validPrefixes [][]byte) (string, error) {
+func Base58AddressEncodeToStringPrefix(data []byte, decodedSize int, validPrefixes [][]byte) (string, error) {
 	err := base58AddressIsValidDataPrefix(data, decodedSize, validPrefixes)
 	if err != nil {
 		return "", err

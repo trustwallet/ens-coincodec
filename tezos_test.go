@@ -37,7 +37,7 @@ func TestTezosEncodeToBytes(t *testing.T) {
 		{
 			name:  "Valid prefix, too short",
 			input: "4cdWcRbbour5VffJdQuSCNG",
-			err:   errors.New("Invalid length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Invalid prefix, valid checksum",
@@ -68,12 +68,12 @@ func TestTezosDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Short",
 			input: keyhash3,
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:   "Good",
