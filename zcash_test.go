@@ -42,12 +42,12 @@ func TestZCashEncodeToBytes(t *testing.T) {
 		{
 			name:  "Valid base58 but too short",
 			input: "TJRyWwFs9wTFGZg3JbrVriFbNfCug5tDeC",
-			err:   errors.New("Invalid length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Valid base 58 and checksum, but prefix is bad",
 			input: "2NRbuP5YfzRNEa1RibT5kXay1VgvQHnydZY1",
-			err:   errors.New("Invalid static prefix"),
+			err:   errors.New("Invalid prefix"),
 		},
 	}
 
@@ -59,12 +59,12 @@ func TestZCashDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Short",
 			input: "06a1a1a7f2ff4762",
-			err:   errors.New("Invalid length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:   "Good",
