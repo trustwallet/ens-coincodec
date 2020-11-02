@@ -25,6 +25,16 @@ func TestZCashEncodeToBytes(t *testing.T) {
 			output: "1cbd48e71790e51ab7558c05a6067cfc4926aa8c44dd",
 		},
 		{
+			name:   "Normal4",
+			input:  "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
+			output: "1cb88c6f453157897ce2e6de413f329d995fe0d8f902",
+		},
+		{
+			name:   "Normal5",
+			input:  "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
+			output: "1cb8f925b59e1dc043ad7f0b7e85ea05b06dfe834138",
+		},
+		{
 			name:  "Invalid Base58",
 			input: "t1RygJmrLdNGgi98+UgEJDTVaELTAYWoMBy",
 			err:   errors.New("Bad Base58 string"),
@@ -75,6 +85,16 @@ func TestZCashDecodeToString(t *testing.T) {
 			name:   "Good2",
 			input:  "1cb869bf38acef973293c07f05c778eb1209748e8d52",
 			output: "t1TWk2mmvESDnE4dmCfT7MQ97ij6ZqLpNVU",
+		},
+		{
+			name:   "Good3",
+			input:  "1cb88c6f453157897ce2e6de413f329d995fe0d8f902",
+			output: "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
+		},
+		{
+			name:   "Good5",
+			input:  "1cb8f925b59e1dc043ad7f0b7e85ea05b06dfe834138",
+			output: "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
 		},
 	}
 
