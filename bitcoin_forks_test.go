@@ -107,7 +107,7 @@ func TestDashEncodeToBytes(t *testing.T) {
 		{
 			name:  "Bitcoin Segwit",
 			input: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
-			err:   errors.New("invalid format: version and/or checksum bytes missing"),
+			err:   errors.New("Bad Base58 string"),
 		},
 	}
 

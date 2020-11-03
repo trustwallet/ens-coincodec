@@ -32,7 +32,7 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 		{
 			name:  "Litecoin legacy",
 			input: "LV7LV7Z4bWDEjYkfx9dQo6k6RjGbXsg6hS",
-			err:   errors.New("invalid address prefix"),
+			err:   errors.New("decoding base58 and bech32 failed: Invalid prefix"),
 		},
 		{
 			name:  "Litecoin segwit",
@@ -52,7 +52,7 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 		{
 			name:  "Ethereum",
 			input: "0x0102030405060708090a0b0c0d0e0f1011121314",
-			err:   errors.New("decoding bech32 failed: invalid index of 1"),
+			err:   errors.New("decoding base58 and bech32 failed"),
 		},
 	}
 
