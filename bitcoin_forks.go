@@ -3,15 +3,15 @@ package coincodec
 import "github.com/wealdtech/go-slip44"
 
 var (
-	configLTC  = CoinConfig{P2PKHPrefix: 0x30, P2SHPPrefix: 0x32, HRP: "ltc"}
-	configMONA = CoinConfig{P2PKHPrefix: 0x32, P2SHPPrefix: 0x37, HRP: "mona"}
-	configQTUM = CoinConfig{P2PKHPrefix: 0x3A, P2SHPPrefix: 0x32, HRP: "qc"}
-	configVIA  = CoinConfig{P2PKHPrefix: 0x47, P2SHPPrefix: 0x21, HRP: "via"}
-	configDGB  = CoinConfig{P2PKHPrefix: 0x1E, P2SHPPrefix: 0x3F, HRP: "dgb"}
-	configDOGE = CoinConfig{P2PKHPrefix: 0x1E, P2SHPPrefix: 0x16}
-	configDASH = CoinConfig{P2PKHPrefix: 0x4C, P2SHPPrefix: 0x10}
-	configXZC  = CoinConfig{P2PKHPrefix: 0x52, P2SHPPrefix: 0x07}
-	configRVN  = CoinConfig{P2PKHPrefix: 0x3C, P2SHPPrefix: 0x7A}
+	configLTC  = CoinConfig{P2PKHPrefix: []byte{0x30}, P2SHPPrefix: []byte{0x32}, HRP: "ltc"}
+	configMONA = CoinConfig{P2PKHPrefix: []byte{0x32}, P2SHPPrefix: []byte{0x37}, HRP: "mona"}
+	configQTUM = CoinConfig{P2PKHPrefix: []byte{0x3A}, P2SHPPrefix: []byte{0x32}, HRP: "qc"}
+	configVIA  = CoinConfig{P2PKHPrefix: []byte{0x47}, P2SHPPrefix: []byte{0x21}, HRP: "via"}
+	configDGB  = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x3F}, HRP: "dgb"}
+	configDOGE = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x16}}
+	configDASH = CoinConfig{P2PKHPrefix: []byte{0x4C}, P2SHPPrefix: []byte{0x10}}
+	configXZC  = CoinConfig{P2PKHPrefix: []byte{0x52}, P2SHPPrefix: []byte{0x07}}
+	configRVN  = CoinConfig{P2PKHPrefix: []byte{0x3C}, P2SHPPrefix: []byte{0x7A}}
 )
 
 func init() {
