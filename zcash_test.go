@@ -12,27 +12,27 @@ func TestZCashEncodeToBytes(t *testing.T) {
 		{
 			name:   "Normal",
 			input:  "t1RygJmrLdNGgi98gUgEJDTVaELTAYWoMBy",
-			output: "1cb858e71790e51ab7558c05a6067cfc4926aa8c44dd",
+			output: "76a91458e71790e51ab7558c05a6067cfc4926aa8c44dd88ac",
 		},
 		{
 			name:   "Normal2",
 			input:  "t1TWk2mmvESDnE4dmCfT7MQ97ij6ZqLpNVU",
-			output: "1cb869bf38acef973293c07f05c778eb1209748e8d52",
+			output: "76a91469bf38acef973293c07f05c778eb1209748e8d5288ac",
 		},
 		{
 			name:   "Normal3",
 			input:  "t3RD6RFKhWSotNbPEY4Vw7Ku9QCfKkzrbBL",
-			output: "1cbd48e71790e51ab7558c05a6067cfc4926aa8c44dd",
+			output: "a91448e71790e51ab7558c05a6067cfc4926aa8c44dd87",
 		},
 		{
 			name:   "Normal4",
 			input:  "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
-			output: "1cb88c6f453157897ce2e6de413f329d995fe0d8f902",
+			output: "76a9148c6f453157897ce2e6de413f329d995fe0d8f90288ac",
 		},
 		{
 			name:   "Normal5",
 			input:  "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
-			output: "1cb8f925b59e1dc043ad7f0b7e85ea05b06dfe834138",
+			output: "76a914f925b59e1dc043ad7f0b7e85ea05b06dfe83413888ac",
 		},
 		{
 			name:  "Invalid Base58",
@@ -69,31 +69,31 @@ func TestZCashDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid decoded length"),
+			err:   errors.New("Invalid opcode bytes"),
 		},
 		{
 			name:  "Short",
 			input: "06a1a1a7f2ff4762",
-			err:   errors.New("Invalid decoded length"),
+			err:   errors.New("Invalid opcode bytes"),
 		},
 		{
 			name:   "Good",
-			input:  "1cb858e71790e51ab7558c05a6067cfc4926aa8c44dd",
+			input:  "76a91458e71790e51ab7558c05a6067cfc4926aa8c44dd88ac",
 			output: "t1RygJmrLdNGgi98gUgEJDTVaELTAYWoMBy",
 		},
 		{
 			name:   "Good2",
-			input:  "1cb869bf38acef973293c07f05c778eb1209748e8d52",
+			input:  "76a91469bf38acef973293c07f05c778eb1209748e8d5288ac",
 			output: "t1TWk2mmvESDnE4dmCfT7MQ97ij6ZqLpNVU",
 		},
 		{
 			name:   "Good3",
-			input:  "1cb88c6f453157897ce2e6de413f329d995fe0d8f902",
+			input:  "76a9148c6f453157897ce2e6de413f329d995fe0d8f90288ac",
 			output: "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
 		},
 		{
 			name:   "Good5",
-			input:  "1cb8f925b59e1dc043ad7f0b7e85ea05b06dfe834138",
+			input:  "76a914f925b59e1dc043ad7f0b7e85ea05b06dfe83413888ac",
 			output: "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
 		},
 	}
