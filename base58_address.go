@@ -7,17 +7,11 @@ import (
 )
 
 func hasPrefix(data []byte, prefix []byte) bool {
-	if len(data) < len(prefix) {
-		return false
+	res := false
+	if len(data) >= len(prefix) {
+		res = bytes.Equal(data[:len(prefix)], prefix)
 	}
-	return bytes.Equal(data[:len(prefix)], prefix)
-}
-
-func base58AddressIsValidData(data []byte, decodedSize int) error {
-	if len(data) != decodedSize {
-		return errors.New("Invalid decoded length")
-	}
-	return nil
+	return res
 }
 
 func base58AddressIsValidDataPrefix(data []byte, decodedSize int, validPrefixes [][]byte) error {
@@ -30,18 +24,6 @@ func base58AddressIsValidDataPrefix(data []byte, decodedSize int, validPrefixes 
 		}
 	}
 	return errors.New("Invalid prefix")
-}
-
-func Base58AddressDecodeToBytes(input string, decodedSize int) ([]byte, error) {
-	decoded, err := Base58ChecksumDecode(input, Base58DefaultAlphabet)
-	if err != nil {
-		return nil, err
-	}
-	err = base58AddressIsValidData(decoded, decodedSize)
-	if err != nil {
-		return nil, err
-	}
-	return decoded, nil
 }
 
 func Base58AddressDecodeToBytesPrefix(input string, decodedSize int, validPrefixes [][]byte) ([]byte, error) {
