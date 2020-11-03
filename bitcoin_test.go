@@ -54,6 +54,11 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 			input: "0x0102030405060708090a0b0c0d0e0f1011121314",
 			err:   errors.New("decoding base58 and bech32 failed"),
 		},
+		{
+			name:  "Invalid prefix",
+			input: "2N2oLLYFCwfH81SUReTcuhtoEHgwHYHQNq",
+			err:   errors.New("decoding base58 and bech32 failed: Invalid prefix"),
+		},
 	}
 
 	RunTestsEncode(t, slip44.BITCOIN, tests)

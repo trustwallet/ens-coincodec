@@ -17,7 +17,7 @@ type CoinConfig struct {
 }
 
 const (
-	btcKeyHashLenght  = 0x14
+	btcKeyHashLenght  = 20
 	btcWitnessVersion = 0x00
 )
 
@@ -69,7 +69,7 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 		return nil, errors.New("invalid address")
 	}
 	// try base58 first
-	data, err := Base58AddressDecodeToBytesPrefix(input, 20+len(config.P2SHPPrefix), [][]byte{config.P2PKHPrefix, config.P2SHPPrefix})
+	data, err := Base58AddressDecodeToBytesPrefix(input, btcKeyHashLenght+len(config.P2SHPPrefix), [][]byte{config.P2PKHPrefix, config.P2SHPPrefix})
 	if err != nil {
 		if len(config.HRP) <= 0 {
 			return nil, err
@@ -89,28 +89,22 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 		prefix = data[:len(config.P2PKHPrefix)]
 		data = data[len(config.P2PKHPrefix):]
 	}
-	// check data length
-	if len(data) != btcKeyHashLenght {
-		return nil, errors.New("invalid data length")
-	}
 	// check prefix
 	if bytes.Equal(prefix, config.P2PKHPrefix) {
 		return buildP2PKHScript(data), nil
 	}
-	if bytes.Equal(prefix, config.P2SHPPrefix) {
-		return buildP2SHScript(data), nil
-	}
-	return nil, errors.New("Invalid address prefix")
+	// config.P2SHPPrefix)
+	return buildP2SHScript(data), nil
 }
 
 func replacePrefix(input []byte, oldPrefix []byte, newPrefix []byte) []byte {
-	if !bytes.HasPrefix(input, oldPrefix) {
-		return input
+	result := input
+	if bytes.HasPrefix(input, oldPrefix) {
+		var withVersion []byte
+		withVersion = append(withVersion, newPrefix...)
+		result = append(withVersion, input[len(oldPrefix):len(input)-len(oldPrefix)+1]...)
 	}
-	var withVersion []byte
-	withVersion = append(withVersion, newPrefix...)
-	withVersion = append(withVersion, input[len(oldPrefix):len(input)-len(oldPrefix)+1]...)
-	return withVersion
+	return result
 }
 
 func bitcoinEncodeToString(input []byte, config *CoinConfig) (string, error) {
