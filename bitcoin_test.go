@@ -8,7 +8,7 @@ import (
 )
 
 func TestBitcoinEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
@@ -65,7 +65,7 @@ func TestBitcoinDecodeToString(t *testing.T) {
 	script3 := "0014751e76e8199196d454941c45d1b3a323f1433bd6"
 	script4 := "00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
