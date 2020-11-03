@@ -2,16 +2,28 @@ package coincodec
 
 import "github.com/wealdtech/go-slip44"
 
+const (
+	ZCashStaticPrefixByte = 0x1C // 28
+	ZCashPrefixByteP2pkh  = 0xB8 // 184
+	ZCashPrefixByteP2sh   = 0xBD // 189
+)
+
 var (
-	configLTC  = CoinConfig{P2PKHPrefix: []byte{0x30}, P2SHPPrefix: []byte{0x32}, HRP: "ltc"}
-	configMONA = CoinConfig{P2PKHPrefix: []byte{0x32}, P2SHPPrefix: []byte{0x37}, HRP: "mona"}
-	configQTUM = CoinConfig{P2PKHPrefix: []byte{0x3A}, P2SHPPrefix: []byte{0x32}, HRP: "qc"}
-	configVIA  = CoinConfig{P2PKHPrefix: []byte{0x47}, P2SHPPrefix: []byte{0x21}, HRP: "via"}
-	configDGB  = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x3F}, HRP: "dgb"}
-	configDOGE = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x16}}
-	configDASH = CoinConfig{P2PKHPrefix: []byte{0x4C}, P2SHPPrefix: []byte{0x10}}
-	configXZC  = CoinConfig{P2PKHPrefix: []byte{0x52}, P2SHPPrefix: []byte{0x07}}
-	configRVN  = CoinConfig{P2PKHPrefix: []byte{0x3C}, P2SHPPrefix: []byte{0x7A}}
+	zcashPrefixP2pkh = []byte{ZCashStaticPrefixByte, ZCashPrefixByteP2pkh}
+	zcashPrefixP2sh  = []byte{ZCashStaticPrefixByte, ZCashPrefixByteP2sh}
+)
+
+var (
+	configLTC   = CoinConfig{P2PKHPrefix: []byte{0x30}, P2SHPPrefix: []byte{0x32}, HRP: "ltc"}
+	configMONA  = CoinConfig{P2PKHPrefix: []byte{0x32}, P2SHPPrefix: []byte{0x37}, HRP: "mona"}
+	configQTUM  = CoinConfig{P2PKHPrefix: []byte{0x3A}, P2SHPPrefix: []byte{0x32}, HRP: "qc"}
+	configVIA   = CoinConfig{P2PKHPrefix: []byte{0x47}, P2SHPPrefix: []byte{0x21}, HRP: "via"}
+	configDGB   = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x3F}, HRP: "dgb"}
+	configDOGE  = CoinConfig{P2PKHPrefix: []byte{0x1E}, P2SHPPrefix: []byte{0x16}}
+	configDASH  = CoinConfig{P2PKHPrefix: []byte{0x4C}, P2SHPPrefix: []byte{0x10}}
+	configXZC   = CoinConfig{P2PKHPrefix: []byte{0x52}, P2SHPPrefix: []byte{0x07}}
+	configRVN   = CoinConfig{P2PKHPrefix: []byte{0x3C}, P2SHPPrefix: []byte{0x7A}}
+	configZCASH = CoinConfig{P2PKHPrefix: zcashPrefixP2pkh, P2SHPPrefix: zcashPrefixP2sh}
 )
 
 func init() {
@@ -50,4 +62,8 @@ func init() {
 	// QTUM
 	toBytesMap[slip44.QTUM] = MakeBitcoinDecodeToBytes(&configQTUM)
 	toStringMap[slip44.QTUM] = MakeBitcoinEncodeToString(&configQTUM)
+
+	// ZCASH
+	toBytesMap[slip44.ZCASH] = MakeBitcoinDecodeToBytes(&configZCASH)
+	toStringMap[slip44.ZCASH] = MakeBitcoinEncodeToString(&configZCASH)
 }
