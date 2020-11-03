@@ -50,3 +50,13 @@ func ZCashEncodeToString(input []byte) (string, error) {
 	}
 	return "", errors.New("Invalid opcode bytes")
 }
+
+func replacePrefix(input []byte, oldPrefix []byte, newPrefix []byte) []byte {
+	if !bytes.HasPrefix(input, oldPrefix) {
+		return input
+	}
+	var withVersion []byte
+	withVersion = append(withVersion, newPrefix...)
+	withVersion = append(withVersion, input[len(oldPrefix):len(input)-len(oldPrefix)+1]...)
+	return withVersion
+}
