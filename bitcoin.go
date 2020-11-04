@@ -93,7 +93,7 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 	if bytes.Equal(prefix, config.P2PKHPrefix) {
 		return buildP2PKHScript(data), nil
 	}
-	// config.P2SHPPrefix)
+	// config.P2SHPPrefix
 	return buildP2SHScript(data), nil
 }
 
@@ -130,7 +130,7 @@ func bitcoinEncodeToString(input []byte, config *CoinConfig) (string, error) {
 		data = append(data, converted...)
 		return bech32.Encode(config.HRP, data)
 	}
-	return "", errors.New("Invalid bytes")
+	return "", errors.New("invalid opcode bytes")
 }
 
 func buildP2PKHScript(bytes []byte) []byte {
