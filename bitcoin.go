@@ -75,9 +75,9 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 			return nil, err
 		}
 		// try bech32
-		decodedHrp, data, err2 := bech32.Decode(input)
-		if err2 != nil {
-			return nil, errors.Wrapf(err2, "decoding base58 and bech32 failed: %v", err.Error())
+		decodedHrp, data, err := bech32.Decode(input)
+		if err != nil {
+			return nil, errors.Wrapf(err, "decoding base58 and bech32 failed")
 		}
 		if decodedHrp != config.HRP {
 			return nil, errors.New("invalid hrp")
