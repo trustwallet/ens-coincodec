@@ -8,7 +8,7 @@ import (
 )
 
 func TestLitecoinEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "LaMT348PWRnrqeeWArpwQPbuanpXDZGEUz",
@@ -34,7 +34,7 @@ func TestLitecoinDecodeToString(t *testing.T) {
 	script2 := "a914b48297bff5dadecc5f36145cec6a5f20d57c8f9b87"
 	script3 := "0014687c150c26af5493befeed7036043812115ca36c"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -56,7 +56,7 @@ func TestLitecoinDecodeToString(t *testing.T) {
 }
 
 func TestDogeEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "DBXu2kgc3xtvCUWFcxFE3r9hEYgmuaaCyD",
@@ -76,7 +76,7 @@ func TestDogeDecodeToString(t *testing.T) {
 	script1 := "76a9144620b70031f0e9437e374a2100934fba4911046088ac"
 	script2 := "a914f8f5d99a9fc21aa676e74d15e7b8134557615bda87"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -93,7 +93,7 @@ func TestDogeDecodeToString(t *testing.T) {
 }
 
 func TestDashEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "XtAG1982HcYJVibHxRZrBmdzL5YTzj4cA1",
@@ -107,7 +107,7 @@ func TestDashEncodeToBytes(t *testing.T) {
 		{
 			name:  "Bitcoin Segwit",
 			input: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
-			err:   errors.New("invalid format: version and/or checksum bytes missing"),
+			err:   errors.New("Bad Base58 string"),
 		},
 	}
 
@@ -118,7 +118,7 @@ func TestDashDecodeToString(t *testing.T) {
 	script1 := "76a914bfa98bb8a919330c432e4ff16563c5ab449604ad88ac"
 	script2 := "a9149d646d71f0815c0cfd8cd08aa9d391cd127f378687"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -135,7 +135,7 @@ func TestDashDecodeToString(t *testing.T) {
 }
 
 func TestMonaEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "MHxgS2XMXjeJ4if2PRRbWYcdwZPWfdwaDT",
@@ -161,7 +161,7 @@ func TestMonaDecodeToString(t *testing.T) {
 	script2 := "a9146449f568c9cd2378138f2636e1567112a184a9e887"
 	script3 := "0014751e76e8199196d454941c45d1b3a323f1433bd6"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -183,7 +183,7 @@ func TestMonaDecodeToString(t *testing.T) {
 }
 
 func TestQtumEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "QYJHEEt8kS8TzUuCy1ia7aYe1cpNg4QYnn",
@@ -209,7 +209,7 @@ func TestQtumDecodeToString(t *testing.T) {
 	script2 := "a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987"
 	script3 := "00143420312df19e36fe37af531a75f183b3f282b862"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -231,7 +231,7 @@ func TestQtumDecodeToString(t *testing.T) {
 }
 
 func TestVIAEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "Vw6bJFaF5Hyiveko7dpqRjVvcTAsjz7eYa",
@@ -249,7 +249,7 @@ func TestVIAEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.VIACOIN, tests)	
+	RunTestsEncode(t, slip44.VIACOIN, tests)
 }
 
 func TestVIADecodeToString(t *testing.T) {
@@ -257,7 +257,7 @@ func TestVIADecodeToString(t *testing.T) {
 	script2 := "a9146b85b3dac9340f36b9d32bbacf2ffcb0851ef17987"
 	script3 := "001484542436f952c22c4c54a0fcd2c997c66317ea30"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -279,7 +279,7 @@ func TestVIADecodeToString(t *testing.T) {
 }
 
 func TestDigiByteEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "DBfCffUdSbhqKZhjuvrJ6AgvJofT4E2kp4",
@@ -297,7 +297,7 @@ func TestDigiByteEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.DIGIBYTE, tests)	
+	RunTestsEncode(t, slip44.DIGIBYTE, tests)
 }
 
 func TestDigiByteDecodeToString(t *testing.T) {
@@ -305,7 +305,7 @@ func TestDigiByteDecodeToString(t *testing.T) {
 	script2 := "a91452356ed3d2d31eb8b263ace5d164e3cf3b37096687"
 	script3 := "0014885534ab5dc680b68d95c0af49ec2acc2e9915c4"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -327,7 +327,7 @@ func TestDigiByteDecodeToString(t *testing.T) {
 }
 
 func TestZcoinEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "a4YtT82mWWxHZhLmdx7e5aroW92dqJoRs3",
@@ -347,7 +347,7 @@ func TestZcoinDecodeToString(t *testing.T) {
 	script1 := "76a9142a10f88e30768d2712665c279922b9621ce58bc788ac"
 	script2 := "a914f010b17a9189e0f2737d71ae9790359eb5bbc13787"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -364,7 +364,7 @@ func TestZcoinDecodeToString(t *testing.T) {
 }
 
 func TestRavenEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "RNoSGCX8SPFscj8epDaJjqEpuZa2B5in88",
@@ -384,7 +384,7 @@ func TestRavenDecodeToString(t *testing.T) {
 	script1 := "76a9149451f4546e09fc2e49ef9b5303924712ec2b038e88ac"
 	script2 := "a914bd92088bb7e82d611a9b94fbb74a0908152b784f87"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "P2PKH",
 			input:  script1,
@@ -398,4 +398,98 @@ func TestRavenDecodeToString(t *testing.T) {
 	}
 
 	RunTestsDecode(t, slip44.RAVENCOIN, tests)
+}
+
+func TestZCashEncodeToBytes(t *testing.T) {
+	tests := []TestcaseEncode{
+		{
+			name:   "Normal",
+			input:  "t1RygJmrLdNGgi98gUgEJDTVaELTAYWoMBy",
+			output: "76a91458e71790e51ab7558c05a6067cfc4926aa8c44dd88ac",
+		},
+		{
+			name:   "Normal2",
+			input:  "t1TWk2mmvESDnE4dmCfT7MQ97ij6ZqLpNVU",
+			output: "76a91469bf38acef973293c07f05c778eb1209748e8d5288ac",
+		},
+		{
+			name:   "Normal3",
+			input:  "t3RD6RFKhWSotNbPEY4Vw7Ku9QCfKkzrbBL",
+			output: "a91448e71790e51ab7558c05a6067cfc4926aa8c44dd87",
+		},
+		{
+			name:   "Normal4",
+			input:  "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
+			output: "76a9148c6f453157897ce2e6de413f329d995fe0d8f90288ac",
+		},
+		{
+			name:   "Normal5",
+			input:  "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
+			output: "76a914f925b59e1dc043ad7f0b7e85ea05b06dfe83413888ac",
+		},
+		{
+			name:  "Invalid Base58",
+			input: "t1RygJmrLdNGgi98+UgEJDTVaELTAYWoMBy",
+			err:   errors.New("Bad Base58 string"),
+		},
+		{
+			name:  "Too short",
+			input: "t1RygJmrLdNGgi98gUgEJDTVaELTAYW",
+			err:   errors.New("Bad Base58 checksum"),
+		},
+		{
+			name:  "Correct length, but bad checksum",
+			input: "t1RygJmrLdNGgi98gUgEJDTVaELTAYWoMBz",
+			err:   errors.New("Bad Base58 checksum"),
+		},
+		{
+			name:  "Valid base58 but too short",
+			input: "TJRyWwFs9wTFGZg3JbrVriFbNfCug5tDeC",
+			err:   errors.New("Invalid decoded length"),
+		},
+		{
+			name:  "Valid base 58 and checksum, but prefix is bad",
+			input: "2NRbuP5YfzRNEa1RibT5kXay1VgvQHnydZY1",
+			err:   errors.New("Invalid prefix"),
+		},
+	}
+
+	RunTestsEncode(t, slip44.ZCASH, tests)
+}
+
+func TestZCashDecodeToString(t *testing.T) {
+	tests := []TestcaseDecode{
+		{
+			name:  "Empty",
+			input: "",
+			err:   errors.New("invalid data length"),
+		},
+		{
+			name:  "Short",
+			input: "06a1a1a7f2ff4762",
+			err:   errors.New("invalid opcode bytes"),
+		},
+		{
+			name:   "Good",
+			input:  "76a91458e71790e51ab7558c05a6067cfc4926aa8c44dd88ac",
+			output: "t1RygJmrLdNGgi98gUgEJDTVaELTAYWoMBy",
+		},
+		{
+			name:   "Good2",
+			input:  "76a91469bf38acef973293c07f05c778eb1209748e8d5288ac",
+			output: "t1TWk2mmvESDnE4dmCfT7MQ97ij6ZqLpNVU",
+		},
+		{
+			name:   "Good3",
+			input:  "76a9148c6f453157897ce2e6de413f329d995fe0d8f90288ac",
+			output: "t1Wg9uPPAfwhBWeRjtDPa5ZHNzyBx9rJVKY",
+		},
+		{
+			name:   "Good5",
+			input:  "76a914f925b59e1dc043ad7f0b7e85ea05b06dfe83413888ac",
+			output: "t1gaySCXCYtXE3ygP38YuWtVZczsEbdjG49",
+		},
+	}
+
+	RunTestsDecode(t, slip44.ZCASH, tests)
 }

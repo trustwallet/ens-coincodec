@@ -3,7 +3,6 @@ package coincodec
 import (
 	"bytes"
 
-	"github.com/btcsuite/btcutil/base58"
 	"github.com/pkg/errors"
 
 	"github.com/btcsuite/btcutil/bech32"
@@ -12,13 +11,13 @@ import (
 
 // CoinConfig for Bitcoin and its forks
 type CoinConfig struct {
-	P2PKHPrefix byte
-	P2SHPPrefix byte
+	P2PKHPrefix []byte
+	P2SHPPrefix []byte
 	HRP         string
 }
 
 const (
-	btcKeyHashLenght  = 0x14
+	btcKeyHashLenght  = 20
 	btcWitnessVersion = 0x00
 )
 
@@ -31,7 +30,7 @@ const (
 )
 
 var (
-	configBTC           = CoinConfig{P2PKHPrefix: 0x00, P2SHPPrefix: 0x05, HRP: "bc"}
+	configBTC           = CoinConfig{P2PKHPrefix: []byte{0x00}, P2SHPPrefix: []byte{0x05}, HRP: "bc"}
 	P2PKH_SCRIPT_PREFIX = []byte{OP_DUP, OP_HASH160, btcKeyHashLenght}
 	P2SH_SCRIPT_PREFIX  = []byte{OP_HASH160, btcKeyHashLenght}
 )
@@ -70,43 +69,56 @@ func bitcoinDecodeToBytes(input string, config *CoinConfig) ([]byte, error) {
 		return nil, errors.New("invalid address")
 	}
 	// try base58 first
-	bytes, version, err := base58.CheckDecode(input)
+	data, err := Base58AddressDecodeToBytesPrefix(input, btcKeyHashLenght+len(config.P2SHPPrefix), [][]byte{config.P2PKHPrefix, config.P2SHPPrefix})
 	if err != nil {
 		if len(config.HRP) <= 0 {
 			return nil, err
 		}
 		// try bech32
-		decodedHrp, bytes, err := bech32.Decode(input)
+		decodedHrp, data, err := bech32.Decode(input)
 		if err != nil {
-			return nil, errors.Wrapf(err, "decoding bech32 failed")
+			return nil, errors.Wrapf(err, "decoding base58 and bech32 failed")
 		}
 		if decodedHrp != config.HRP {
 			return nil, errors.New("invalid hrp")
 		}
-		return buildWitnessScript(bytes)
+		return buildWitnessScript(data)
 	}
-	// check data length
-	if len(bytes) != btcKeyHashLenght {
-		return nil, errors.New("invalid data length")
+	var prefix []byte
+	if len(data) >= len(config.P2PKHPrefix) {
+		prefix = data[:len(config.P2PKHPrefix)]
+		data = data[len(config.P2PKHPrefix):]
 	}
-	// check version byte
-	if version == config.P2PKHPrefix {
-		return buildP2PKHScript(bytes), nil
-	} else if version == config.P2SHPPrefix {
-		return buildP2SHScript(bytes), nil
+	// check prefix
+	if bytes.Equal(prefix, config.P2PKHPrefix) {
+		return buildP2PKHScript(data), nil
 	}
-	return nil, errors.New("invalid address prefix")
+	// config.P2SHPPrefix
+	return buildP2SHScript(data), nil
+}
+
+func replacePrefix(input []byte, oldPrefix []byte, newPrefix []byte) []byte {
+	result := input
+	if bytes.HasPrefix(input, oldPrefix) {
+		var withVersion []byte
+		withVersion = append(withVersion, newPrefix...)
+		result = append(withVersion, input[len(oldPrefix):len(input)-len(oldPrefix)+1]...)
+	}
+	return result
 }
 
 func bitcoinEncodeToString(input []byte, config *CoinConfig) (string, error) {
 	if len(input) == 0 {
 		return "", errors.New("invalid data length")
 	}
+
 	if bytes.HasPrefix(input, P2PKH_SCRIPT_PREFIX) {
-		return base58.CheckEncode(input[3:len(input)-2], config.P2PKHPrefix), nil
-	} else if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
-		return base58.CheckEncode(input[2:len(input)-1], config.P2SHPPrefix), nil
-	} else if input[0] == btcWitnessVersion && len(input) > 2 && len(config.HRP) > 0 {
+		return Base58ChecksumEncode(replacePrefix(input, P2PKH_SCRIPT_PREFIX, config.P2PKHPrefix), Base58DefaultAlphabet), nil
+	}
+	if bytes.HasPrefix(input, P2SH_SCRIPT_PREFIX) {
+		return Base58ChecksumEncode(replacePrefix(input, P2SH_SCRIPT_PREFIX, config.P2SHPPrefix), Base58DefaultAlphabet), nil
+	}
+	if input[0] == btcWitnessVersion && len(input) > 2 && len(config.HRP) > 0 {
 		if int(input[1]) != len(input)-2 {
 			return "", errors.New("wrong script data")
 		}
@@ -118,7 +130,7 @@ func bitcoinEncodeToString(input []byte, config *CoinConfig) (string, error) {
 		data = append(data, converted...)
 		return bech32.Encode(config.HRP, data)
 	}
-	return "", errors.New("invalid bytes")
+	return "", errors.New("invalid opcode bytes")
 }
 
 func buildP2PKHScript(bytes []byte) []byte {

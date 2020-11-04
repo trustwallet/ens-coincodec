@@ -1,8 +1,6 @@
 package coincodec
 
 import (
-	"bytes"
-	"errors"
 	"github.com/wealdtech/go-slip44"
 )
 
@@ -11,9 +9,10 @@ const (
 )
 
 var (
-	tz1Prefix = []byte{6, 161, 159}
-	tz2Prefix = []byte{6, 161, 161}
-	tz3Prefix = []byte{6, 161, 164}
+	tz1Prefix  = []byte{6, 161, 159}
+	tz2Prefix  = []byte{6, 161, 161}
+	tz3Prefix  = []byte{6, 161, 164}
+	tzPrefixes = [][]byte{tz1Prefix, tz2Prefix, tz3Prefix}
 )
 
 func init() {
@@ -23,28 +22,10 @@ func init() {
 
 // TezosDecodeToBytes converts the input string to a byte array
 func TezosDecodeToBytes(input string) ([]byte, error) {
-	decoded, err := Base58ChecksumDecode(input, Base58DefaultAlphabet)
-	if err != nil {
-		return nil, err
-	}
-	if len(decoded) != TezosAddressLength {
-		return nil, errors.New("Invalid length")
-	}
-	// prefix check
-	prefix := decoded[0:3]
-	if !bytes.Equal(prefix, tz1Prefix) &&
-		!bytes.Equal(prefix, tz2Prefix) &&
-		!bytes.Equal(prefix, tz3Prefix) {
-		return nil, errors.New("Invalid prefix")
-	}
-	return decoded, nil
+	return Base58AddressDecodeToBytesPrefix(input, TezosAddressLength, tzPrefixes)
 }
 
 // TezosEncodeToString converts the input byte array to a string representation of the Tezos address.
 func TezosEncodeToString(bytes []byte) (string, error) {
-	if len(bytes) != TezosAddressLength {
-		return "", errors.New("Invalid decoded address length")
-	}
-	encoded := Base58ChecksumEncode(bytes, Base58DefaultAlphabet)
-	return encoded, nil
+	return Base58AddressEncodeToStringPrefix(bytes, TezosAddressLength, tzPrefixes)
 }

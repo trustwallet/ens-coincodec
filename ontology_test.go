@@ -57,7 +57,7 @@ func TestOntologyEncodeToBytes(t *testing.T) {
 		{
 			name:  "Valid base 58 and checksum, but version is bad",
 			input: "GyscQcQtoyAiYSwGuELv1FjbqfXwwQPQ8Z",
-			err:   errors.New("Invalid version"),
+			err:   errors.New("Invalid prefix"),
 		},
 		{
 			name:  "Bad checksum",
@@ -74,22 +74,37 @@ func TestOntologyDecodeToString(t *testing.T) {
 		{
 			name:  "Empty",
 			input: "",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:  "Empty",
 			input: "06a1a1a7f2ff4762",
-			err:   errors.New("Invalid decoded address length"),
+			err:   errors.New("Invalid decoded length"),
 		},
 		{
 			name:   "Good",
-			input:  "415cd0fb0ab3ce40f3051414c604b27756e69e43db",
-			output: "TJRyWwFs9wTFGZg3JbrVriFbNfCug5tDeC",
+			input:  "1746b1a18af6b7c9f8a4602f9f73eeb3030f0c29b7",
+			output: "ANDfjwrUroaVtvBguDtrWKRMyxFwvVwnZD",
 		},
 		{
 			name:   "Good2",
-			input:  "4151b5659b685047f35498f763dce619c4720d2aa7",
-			output: "THRF3GuPnvvPzKoaT8pJex5XHmo8NNbCb3",
+			input:  "17fbacc8214765d457c8e3f2b5a1d3c4981a2e9d2a",
+			output: "AeicEjZyiXKgUeSBbYQHxsU1X3V5Buori5",
+		},
+		{
+			name:   "Good3",
+			input:  "17b716d488862fedd488a4616cfc0068bb6a6c849f",
+			output: "AYTxeseHT5khTWhtWX1pFFP1mbQrd4q1zz",
+		},
+		{
+			name:  "Invalid Prefix",
+			input: "415cd0fb0ab3ce40f3051414c604b27756e69e43db",
+			err:   errors.New("Invalid prefix"),
+		},
+		{
+			name:  "Invalid Prefix2",
+			input: "4151b5659b685047f35498f763dce619c4720d2aa7",
+			err:   errors.New("Invalid prefix"),
 		},
 	}
 

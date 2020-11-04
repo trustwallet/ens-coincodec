@@ -8,7 +8,7 @@ import (
 )
 
 func TestBitcoinEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
@@ -32,7 +32,7 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 		{
 			name:  "Litecoin legacy",
 			input: "LV7LV7Z4bWDEjYkfx9dQo6k6RjGbXsg6hS",
-			err:   errors.New("invalid address prefix"),
+			err:   errors.New("decoding base58 and bech32 failed"),
 		},
 		{
 			name:  "Litecoin segwit",
@@ -52,7 +52,12 @@ func TestBitcoinEncodeToBytes(t *testing.T) {
 		{
 			name:  "Ethereum",
 			input: "0x0102030405060708090a0b0c0d0e0f1011121314",
-			err:   errors.New("decoding bech32 failed: invalid index of 1"),
+			err:   errors.New("decoding base58 and bech32 failed"),
+		},
+		{
+			name:  "Invalid prefix",
+			input: "2N2oLLYFCwfH81SUReTcuhtoEHgwHYHQNq",
+			err:   errors.New("decoding base58 and bech32 failed"),
 		},
 	}
 
@@ -65,7 +70,7 @@ func TestBitcoinDecodeToString(t *testing.T) {
 	script3 := "0014751e76e8199196d454941c45d1b3a323f1433bd6"
 	script4 := "00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
