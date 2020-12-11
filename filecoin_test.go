@@ -160,7 +160,7 @@ func TestFilecoinToBytes(t *testing.T) {
 		},
 		{
 			name:  "Invalid number",
-			input: "f012C3",
+			input: "f0C12",
 			err:   errors.New("Invalid ID"),
 		},
 		{
