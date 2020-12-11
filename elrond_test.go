@@ -23,6 +23,11 @@ func TestElrondEncodeToBytes(t *testing.T) {
 			input:  "erd19nu5t7hszckwah5nlcadmk5rlchtugzplznskffpwecygcu0520s9tnyy0",
 			output: "2cf945faf0162ceede93fe3addda83fe2ebe2041f8a70b2521767044638fa29f",
 		},
+		{
+			name:   "ensdomains",
+			input:  "erd1qdzvfpa7gqjsnfhdxhvcp2mlysc80uz60yjhxre3lwl00q0jd4nqgauy9q",
+			output: "0344c487be402509a6ed35d980ab7f243077f05a7925730f31fbbef781f26d66",
+		},
 		// invalid
 		{
 			name:  "Empty",
