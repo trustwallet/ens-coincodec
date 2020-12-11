@@ -65,8 +65,8 @@ func getType(raw byte) Type {
 // Returns the payload size (excluding any prefixes) of an address type.
 // If the payload size is undefined/variable (e.g. ID)
 // or the type is unknown, it returns zero.
-func payloadSize(typ Type) byte {
-	switch typ {
+func payloadSize(t Type) byte {
+	switch t {
 	case TypeSecp256k1:
 		return 20
 	case TypeActor:
@@ -97,9 +97,9 @@ func filecoinComputeChecksum(address []byte) []byte {
 	return sum
 }
 
-func isValidBase32(input string, typ Type) error {
+func isValidBase32(input string, t Type) error {
 	// Check if valid Base32.
-	size := payloadSize(typ)
+	size := payloadSize(t)
 	var decoded []byte = make([]byte, size+checksumSize)
 	_, err := base32Encoding.Decode(decoded, []byte(input[2:]))
 	if err != nil {
@@ -111,7 +111,7 @@ func isValidBase32(input string, typ Type) error {
 	}
 	// Extract raw address
 	var address []byte = make([]byte, 0)
-	address = append(address, byte(typ))
+	address = append(address, byte(t))
 	address = append(address, decoded[:size]...)
 	// Verify checksum
 	shouldSum := filecoinComputeChecksum(address)
@@ -177,17 +177,17 @@ func FilecoinEncodeToString(data []byte) (string, error) {
 	if len(data) < 2 {
 		return "", errors.New("Data too short")
 	}
-	var typ Type = getType(data[0])
-	if typ == TypeInvalid {
+	var t Type = getType(data[0])
+	if t == TypeInvalid {
 		return "", errors.New("Invalid type")
 	}
 	var s string
 	// Main net address prefix
 	s += string(PREFIX)
 	// Address type prefix
-	s += typeAscii(typ)
+	s += typeAscii(t)
 
-	if typ == TypeID {
+	if t == TypeID {
 		var id uint = 0
 		shift := 0
 		for i := 1; i < len(data); i++ {
@@ -203,7 +203,7 @@ func FilecoinEncodeToString(data []byte) (string, error) {
 		return s, nil
 	}
 
-	psize := payloadSize(typ)
+	psize := payloadSize(t)
 	if len(data) != 1+int(psize) {
 		return "", errors.New("Invalid length")
 	}
