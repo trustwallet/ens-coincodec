@@ -154,6 +154,16 @@ func TestFilecoinToBytes(t *testing.T) {
 			err:   errors.New("Invalid ID"),
 		},
 		{
+			name:  "Too  long",
+			input: "f0111111111111111111111111111111111111111111111111111111111111",
+			err:   errors.New("Invalid ID"),
+		},
+		{
+			name:  "Invalid number",
+			input: "f012C3",
+			err:   errors.New("Invalid ID"),
+		},
+		{
 			name:  "Embedded NUL",
 			input: "f15ihq5ibzwki2b4ep2f46avlkr\000zhpqgtga7pdrq",
 			err:   errors.New("decoding base32 failed"),

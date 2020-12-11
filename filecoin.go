@@ -90,14 +90,11 @@ func isValidID(id string) bool {
 	return err == nil
 }
 
-func filecoinComputeChecksum(address []byte) ([]byte, error) {
-	hash, err := blake2b.New(int(checksumSize), nil)
-	if err != nil {
-		return nil, err
-	}
+func filecoinComputeChecksum(address []byte) []byte {
+	hash, _ := blake2b.New(int(checksumSize), nil)
 	hash.Write(address)
 	sum := hash.Sum(nil)
-	return sum, nil
+	return sum
 }
 
 func isValidBase32(input string, typ Type) error {
@@ -117,10 +114,7 @@ func isValidBase32(input string, typ Type) error {
 	address = append(address, byte(typ))
 	address = append(address, decoded[:size]...)
 	// Verify checksum
-	shouldSum, err := filecoinComputeChecksum(address)
-	if err != nil {
-		return err
-	}
+	shouldSum := filecoinComputeChecksum(address)
 	if bytes.Compare(shouldSum[:], decoded[size:]) != 0 {
 		return errors.New("Wrong checksum")
 	}
@@ -221,10 +215,7 @@ func FilecoinEncodeToString(data []byte) (string, error) {
 	// Copy address payload without prefix
 	toEncode = append(toEncode, data[1:psize+1]...)
 	// Append checksum
-	sum, err := filecoinComputeChecksum(data)
-	if err != nil {
-		return "", err
-	}
+	sum := filecoinComputeChecksum(data)
 	toEncode = append(toEncode, sum...)
 	s += base32Encoding.EncodeToString(toEncode)
 	return s, nil
