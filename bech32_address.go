@@ -5,13 +5,13 @@ import (
 )
 
 const (
-	keyhashLength = 20
+	Bech32DefaultKeyhashLength = 20
 )
 
 var errorBech32KeyHash = errors.New("A Bech32 address key hash must be 20 bytes")
 
 // Bech32AddressDecodeToBytes converts the input string to a byte array
-func Bech32AddressDecodeToBytes(hrp string, input string) ([]byte, error) {
+func Bech32AddressDecodeToBytes(hrp string, input string, keyhashLength int) ([]byte, error) {
 	var empty []byte
 	bytes, err := Bech32DecodeToBytes(input, hrp)
 	if err != nil {
@@ -24,7 +24,7 @@ func Bech32AddressDecodeToBytes(hrp string, input string) ([]byte, error) {
 }
 
 // Bech32AddressEncodeToString converts the input byte array to a string representation of the bech32 address.
-func Bech32AddressEncodeToString(hrp string, bytes []byte) (string, error) {
+func Bech32AddressEncodeToString(hrp string, bytes []byte, keyhashLength int) (string, error) {
 	if len(bytes) != keyhashLength {
 		return "", errorBech32KeyHash
 	}
