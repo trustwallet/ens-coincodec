@@ -154,10 +154,7 @@ func FilecoinDecodeToBytes(input string) ([]byte, error) {
 	// First byte is type
 	bytes = append(bytes, byte(typ))
 	if typ == TypeID {
-		id, err := strconv.ParseUint(input[2:], 10, 0)
-		if err != nil {
-			return nil, err
-		}
+		id, _ := strconv.ParseUint(input[2:], 10, 0) // error checked in isValid
 		for id >= 0x80 {
 			bytes = append(bytes, byte(id)|byte(0x80))
 			id >>= 7

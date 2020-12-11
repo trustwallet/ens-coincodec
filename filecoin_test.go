@@ -184,6 +184,11 @@ func TestFilecoinToBytes(t *testing.T) {
 			err:   errors.New("Invalid type"),
 		},
 		{
+			name:  "Invalid length",
+			input: "f15ihq5ibzwki2b4ep2f46avlkrqzhpqg",
+			err:   errors.New("Wrong checksum"),
+		},
+		{
 			name:  "Invalid checksum case1",
 			input: "f15ihq5ibzwki2b4ep2f46avlkrqzhpqgtga7rdrr",
 			err:   errors.New("Wrong checksum"),
@@ -360,4 +365,13 @@ func TestFilecoinToString(t *testing.T) {
 
 	// 461 slip44.FILECOIN
 	RunTestsDecode(t, 461, tests)
+}
+
+func TestFilecoinTypes(t *testing.T) {
+	if 20 != payloadSize(TypeSecp256k1) {
+		t.Error("Wrong payloadSize TypeSecp256k1")
+	}
+	if 0 != payloadSize(TypeInvalid) {
+		t.Error("Wrong payloadSize TypeInvalid")
+	}
 }
