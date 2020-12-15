@@ -1,14 +1,15 @@
 package coincodec
 
+import "github.com/wealdtech/go-slip44"
+
 const (
 	hrpElrond           = "erd"
 	ElrondKeyhashLength = 32
 )
 
 func init() {
-	// 508 slip44.ELROND
-	toBytesMap[508] = ElrondDecodeToBytes
-	toStringMap[508] = ElrondEncodeToString
+	toBytesMap[slip44.ELROND] = ElrondDecodeToBytes
+	toStringMap[slip44.ELROND] = ElrondEncodeToString
 }
 
 // ElrondDecodeToBytes converts the input string to a byte array

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
 func TestElrondEncodeToBytes(t *testing.T) {
@@ -61,8 +62,7 @@ func TestElrondEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	// 508 slip44.ELROND
-	RunTestsEncode(t, 508, tests)
+	RunTestsEncode(t, slip44.ELROND, tests)
 }
 
 func TestElrondDecodeToString(t *testing.T) {
@@ -95,6 +95,5 @@ func TestElrondDecodeToString(t *testing.T) {
 		},
 	}
 
-	// 508 slip44.ELROND
-	RunTestsDecode(t, 508, tests)
+	RunTestsDecode(t, slip44.ELROND, tests)
 }
