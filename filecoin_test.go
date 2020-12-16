@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/wealdtech/go-slip44"
 )
 
 func TestFilecoinToBytes(t *testing.T) {
@@ -205,8 +206,7 @@ func TestFilecoinToBytes(t *testing.T) {
 		},
 	}
 
-	// 461 slip44.FILECOIN
-	RunTestsEncode(t, 461, tests)
+	RunTestsEncode(t, slip44.FILECOIN, tests)
 }
 
 func TestFilecoinToString(t *testing.T) {
@@ -363,8 +363,7 @@ func TestFilecoinToString(t *testing.T) {
 		},
 	}
 
-	// 461 slip44.FILECOIN
-	RunTestsDecode(t, 461, tests)
+	RunTestsDecode(t, slip44.FILECOIN, tests)
 }
 
 func TestFilecoinTypes(t *testing.T) {
