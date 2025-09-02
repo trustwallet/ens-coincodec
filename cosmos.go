@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -9,8 +9,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.ATOM] = CosmosDecodeToBytes
-	toStringMap[slip44.ATOM] = CosmosEncodeToString
+	toBytesMap[coin.COSMOS] = CosmosDecodeToBytes
+	toStringMap[coin.COSMOS] = CosmosEncodeToString
 }
 
 // CosmosDecodeToBytes converts the input string to a byte array

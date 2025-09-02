@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestFilecoinToBytes(t *testing.T) {
@@ -206,7 +206,7 @@ func TestFilecoinToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.FILECOIN, tests)
+	RunTestsEncode(t, coin.FILECOIN, tests)
 }
 
 func TestFilecoinToString(t *testing.T) {
@@ -363,7 +363,7 @@ func TestFilecoinToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.FILECOIN, tests)
+	RunTestsDecode(t, coin.FILECOIN, tests)
 }
 
 func TestFilecoinTypes(t *testing.T) {

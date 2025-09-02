@@ -2,7 +2,7 @@ package coincodec
 
 import (
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -10,8 +10,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.RIPPLE] = XRPDecodeToBytes
-	toStringMap[slip44.RIPPLE] = XRPEncodeToString
+	toBytesMap[coin.RIPPLE] = XRPDecodeToBytes
+	toStringMap[coin.RIPPLE] = XRPEncodeToString
 }
 
 // XRPDecodeToBytes converts the input string to a byte array

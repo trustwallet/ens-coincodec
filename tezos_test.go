@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestTezosEncodeToBytes(t *testing.T) {
@@ -56,7 +56,7 @@ func TestTezosEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.TEZOS, tests)
+	RunTestsEncode(t, coin.TEZOS, tests)
 }
 
 func TestTezosDecodeToString(t *testing.T) {
@@ -87,5 +87,5 @@ func TestTezosDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.TEZOS, tests)
+	RunTestsDecode(t, coin.TEZOS, tests)
 }

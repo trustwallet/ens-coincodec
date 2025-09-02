@@ -3,11 +3,11 @@ package coincodec
 import (
 	"testing"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestIoTexEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "io187wzp08vnhjjpkydnr97qlh8kh0dpkkytfam8j",
@@ -15,13 +15,13 @@ func TestIoTexEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.IOTEX, tests)
+	RunTestsEncode(t, coin.IOTEX, tests)
 }
 
 func TestIoTexDecodeToString(t *testing.T) {
 	keyhash := "3f9c20bcec9de520d88d98cbe07ee7b5ded0dac4"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "Good",
 			input:  keyhash,
@@ -29,5 +29,5 @@ func TestIoTexDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.IOTEX, tests)
+	RunTestsDecode(t, coin.IOTEX, tests)
 }

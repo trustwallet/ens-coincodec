@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestCosmosEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "cosmos1hsk6jryyqjfhp5dhc55tc9jtckygx0eph6dd02",
@@ -36,14 +36,14 @@ func TestCosmosEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ATOM, tests)
+	RunTestsEncode(t, coin.COSMOS, tests)
 }
 
 func TestCosmosDecodeToString(t *testing.T) {
 	keyhash := "bc2da90c84049370d1b7c528bc164bc588833f21"
 	keyhash2 := "6e436a571cec916167ba105160474b9c9cd132bd"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
@@ -66,5 +66,5 @@ func TestCosmosDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ATOM, tests)
+	RunTestsDecode(t, coin.COSMOS, tests)
 }

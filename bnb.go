@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -9,8 +9,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.BINANCE] = BNBDecodeToBytes
-	toStringMap[slip44.BINANCE] = BNBEncodeToString
+	toBytesMap[coin.BINANCE] = BNBDecodeToBytes
+	toStringMap[coin.BINANCE] = BNBEncodeToString
 }
 
 // BNBDecodeToBytes converts the input string to a byte array

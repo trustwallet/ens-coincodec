@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestStellarEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "GAI3GJ2Q3B35AOZJ36C4ANE3HSS4NK7WI6DNO4ZSHRAX6NG7BMX6VJER",
@@ -31,13 +31,13 @@ func TestStellarEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.STELLAR_LUMENS, tests)
+	RunTestsEncode(t, coin.STELLAR, tests)
 }
 
 func TestStellarDecodeToString(t *testing.T) {
 	pubkey := "11b32750d877d03b29df85c0349b3ca5c6abf64786d773323c417f34df0b2fea"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "Good",
 			input:  pubkey,
@@ -45,5 +45,5 @@ func TestStellarDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.STELLAR_LUMENS, tests)
+	RunTestsDecode(t, coin.STELLAR, tests)
 }

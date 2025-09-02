@@ -6,19 +6,16 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 	"golang.org/x/crypto/sha3"
 )
 
 func init() {
-	chains := []uint32{
-		slip44.ETHER, slip44.ETHER_CLASSIC, slip44.GOCHAIN_GO,
-		slip44.POA, slip44.CALLISTO, slip44.TOMO,
-		slip44.THUNDERCORE, slip44.THETA, slip44.VECHAIN_TOKEN,
-	}
-	for _, c := range chains {
-		toBytesMap[c] = EtherToBytes
-		toStringMap[c] = EtherToString
+	for _, c := range coin.Coins {
+		if coin.IsEVM(c.ID) {
+			toBytesMap[uint32(c.ID)] = EtherToBytes
+			toStringMap[uint32(c.ID)] = EtherToString
+		}
 	}
 }
 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestEtherToBytes(t *testing.T) {
@@ -51,7 +51,7 @@ func TestEtherToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ETHER, tests)
+	RunTestsEncode(t, coin.ETHEREUM, tests)
 }
 
 func TestEtherToString(t *testing.T) {
@@ -73,5 +73,5 @@ func TestEtherToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ETHER, tests)
+	RunTestsDecode(t, coin.ETHEREUM, tests)
 }

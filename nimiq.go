@@ -7,12 +7,12 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func init() {
-	toBytesMap[slip44.NIMIQ] = NimiqDecodeToBytes
-	toStringMap[slip44.NIMIQ] = NimiqEncodeToString
+	toBytesMap[coin.NIMIQ] = NimiqDecodeToBytes
+	toStringMap[coin.NIMIQ] = NimiqEncodeToString
 }
 
 var base32NimiqEncoding = base32.NewEncoding("0123456789ABCDEFGHJKLMNPQRSTUVXY")

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestToBytes(t *testing.T) {
@@ -19,7 +19,7 @@ func TestToBytes(t *testing.T) {
 		{
 			name:     "Empty",
 			input:    "",
-			coinType: slip44.ETHER,
+			coinType: coin.ETHEREUM,
 			err:      errors.New("empty input"),
 		},
 		{
@@ -31,7 +31,7 @@ func TestToBytes(t *testing.T) {
 		{
 			name:     "Good",
 			input:    "0x0102030405060708090a0B0c0d0e0f1011121314",
-			coinType: slip44.ETHER,
+			coinType: coin.ETHEREUM,
 			output:   []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14},
 		},
 	}
@@ -70,13 +70,13 @@ func TestToString(t *testing.T) {
 		{
 			name:     "Nil",
 			input:    nil,
-			coinType: slip44.ETHER,
+			coinType: coin.ETHEREUM,
 			err:      errors.New("empty input"),
 		},
 		{
 			name:     "Empty",
 			input:    []byte{},
-			coinType: slip44.ETHER,
+			coinType: coin.ETHEREUM,
 			err:      errors.New("empty input"),
 		},
 		{
@@ -88,7 +88,7 @@ func TestToString(t *testing.T) {
 		{
 			name:     "Good",
 			input:    []byte{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14},
-			coinType: slip44.ETHER,
+			coinType: coin.ETHEREUM,
 			output:   "0x0102030405060708090a0B0c0d0e0f1011121314",
 		},
 	}

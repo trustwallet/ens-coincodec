@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestNimiqEncodeToBytes(t *testing.T) {
@@ -50,7 +50,7 @@ func TestNimiqEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.NIMIQ, tests)
+	RunTestsEncode(t, coin.NIMIQ, tests)
 
 	// Since the runtime of NimiqEncodeToString is
 	// dependent on the input, we should fuzz it.
@@ -94,5 +94,5 @@ func TestNimiqDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.NIMIQ, tests)
+	RunTestsDecode(t, coin.NIMIQ, tests)
 }

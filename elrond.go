@@ -1,6 +1,8 @@
 package coincodec
 
-import "github.com/wealdtech/go-slip44"
+import (
+	"github.com/trustwallet/go-primitives/coin"
+)
 
 const (
 	hrpElrond           = "erd"
@@ -8,8 +10,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.ELROND] = ElrondDecodeToBytes
-	toStringMap[slip44.ELROND] = ElrondEncodeToString
+	toBytesMap[coin.ELROND] = ElrondDecodeToBytes
+	toStringMap[coin.ELROND] = ElrondEncodeToString
 }
 
 // ElrondDecodeToBytes converts the input string to a byte array

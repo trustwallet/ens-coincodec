@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestBitcoinCashEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "P2PKH",
 			input:  "1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu",
@@ -41,14 +41,14 @@ func TestBitcoinCashEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.BITCOIN_CASH, tests)
+	RunTestsEncode(t, coin.BITCOINCASH, tests)
 }
 
 func TestBitcoinCashDecodeToString(t *testing.T) {
 	script1 := "76a914cb481232299cd5743151ac4b2d63ae198e7bb0a988ac"
 	script2 := "a914cb481232299cd5743151ac4b2d63ae198e7bb0a987"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
@@ -71,5 +71,5 @@ func TestBitcoinCashDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.BITCOIN_CASH, tests)
+	RunTestsDecode(t, coin.BITCOINCASH, tests)
 }

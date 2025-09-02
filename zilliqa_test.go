@@ -3,11 +3,11 @@ package coincodec
 import (
 	"testing"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestZilliqaEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "zil10lx2eurx5hexaca0lshdr75czr025cevqu83uz",
@@ -15,13 +15,13 @@ func TestZilliqaEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ZILLIQA, tests)
+	RunTestsEncode(t, coin.ZILLIQA, tests)
 }
 
 func TestZilliqaDecodeToString(t *testing.T) {
 	keyhash := "7fccacf066a5f26ee3affc2ed1fa9810deaa632c"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "Good",
 			input:  keyhash,
@@ -29,5 +29,5 @@ func TestZilliqaDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ZILLIQA, tests)
+	RunTestsDecode(t, coin.ZILLIQA, tests)
 }

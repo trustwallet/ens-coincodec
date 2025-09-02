@@ -5,7 +5,7 @@ import (
 	"encoding/base32"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -13,11 +13,11 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.STELLAR_LUMENS] = StellarDecodeToBytes
-	toStringMap[slip44.STELLAR_LUMENS] = StellarEncodeToString
+	toBytesMap[coin.STELLAR] = StellarDecodeToBytes
+	toStringMap[coin.STELLAR] = StellarEncodeToString
 
-	toBytesMap[slip44.KIN] = StellarDecodeToBytes
-	toStringMap[slip44.KIN] = StellarEncodeToString
+	toBytesMap[coin.KIN] = StellarDecodeToBytes
+	toStringMap[coin.KIN] = StellarEncodeToString
 }
 
 // StellarDecodeToBytes converts the input string to a byte array

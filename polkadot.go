@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -9,8 +9,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.POLKADOT] = PolkadotDecodeToBytes
-	toStringMap[slip44.POLKADOT] = PolkadotEncodeToString
+	toBytesMap[coin.POLKADOT] = PolkadotDecodeToBytes
+	toStringMap[coin.POLKADOT] = PolkadotEncodeToString
 }
 
 // PolkadotDecodeToBytes converts the input string to a byte array

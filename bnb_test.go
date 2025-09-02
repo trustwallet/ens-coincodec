@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestBNBEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
@@ -31,12 +31,12 @@ func TestBNBEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.BINANCE, tests)
+	RunTestsEncode(t, coin.BINANCE, tests)
 }
 
 func TestBNBDecodeToString(t *testing.T) {
 	keyhash := "40c2979694bbc961023d1d27be6fc4d21a9febe6"
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:  "Empty",
 			input: "",
@@ -54,5 +54,5 @@ func TestBNBDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.BINANCE, tests)
+	RunTestsDecode(t, coin.BINANCE, tests)
 }

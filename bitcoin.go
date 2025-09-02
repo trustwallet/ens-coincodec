@@ -4,9 +4,9 @@ import (
 	"bytes"
 
 	"github.com/pkg/errors"
+	"github.com/trustwallet/go-primitives/coin"
 
 	"github.com/btcsuite/btcutil/bech32"
-	"github.com/wealdtech/go-slip44"
 )
 
 // CoinConfig for Bitcoin and its forks
@@ -36,8 +36,8 @@ var (
 )
 
 func init() {
-	toBytesMap[slip44.BITCOIN] = BitcoinDecodeToBytes
-	toStringMap[slip44.BITCOIN] = BitcoinEncodeToString
+	toBytesMap[coin.BITCOIN] = BitcoinDecodeToBytes
+	toStringMap[coin.BITCOIN] = BitcoinEncodeToString
 }
 
 // BitcoinDecodeToBytes converts the input string to a byte array
