@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestOntologyEncodeToBytes(t *testing.T) {
@@ -66,7 +66,7 @@ func TestOntologyEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ONTOLOGY, tests)
+	RunTestsEncode(t, coin.ONTOLOGY, tests)
 }
 
 func TestOntologyDecodeToString(t *testing.T) {
@@ -108,5 +108,5 @@ func TestOntologyDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ONTOLOGY, tests)
+	RunTestsDecode(t, coin.ONTOLOGY, tests)
 }

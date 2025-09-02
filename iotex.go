@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -9,8 +9,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.IOTEX] = IoTexDecodeToBytes
-	toStringMap[slip44.IOTEX] = IoTexEncodeToString
+	toBytesMap[coin.IOTEX] = IoTexDecodeToBytes
+	toStringMap[coin.IOTEX] = IoTexEncodeToString
 }
 
 // IoTexDecodeToBytes converts the input string to a byte array

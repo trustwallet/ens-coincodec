@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestLitecoinEncodeToBytes(t *testing.T) {
@@ -26,7 +26,7 @@ func TestLitecoinEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.LITECOIN, tests)
+	RunTestsEncode(t, coin.LITECOIN, tests)
 }
 
 func TestLitecoinDecodeToString(t *testing.T) {
@@ -52,7 +52,7 @@ func TestLitecoinDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.LITECOIN, tests)
+	RunTestsDecode(t, coin.LITECOIN, tests)
 }
 
 func TestDogeEncodeToBytes(t *testing.T) {
@@ -69,7 +69,7 @@ func TestDogeEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.DOGECOIN, tests)
+	RunTestsEncode(t, coin.DOGE, tests)
 }
 
 func TestDogeDecodeToString(t *testing.T) {
@@ -89,7 +89,7 @@ func TestDogeDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.DOGECOIN, tests)
+	RunTestsDecode(t, coin.DOGE, tests)
 }
 
 func TestDashEncodeToBytes(t *testing.T) {
@@ -111,7 +111,7 @@ func TestDashEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.DASH, tests)
+	RunTestsEncode(t, coin.DASH, tests)
 }
 
 func TestDashDecodeToString(t *testing.T) {
@@ -131,7 +131,7 @@ func TestDashDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.DASH, tests)
+	RunTestsDecode(t, coin.DASH, tests)
 }
 
 func TestMonaEncodeToBytes(t *testing.T) {
@@ -153,7 +153,7 @@ func TestMonaEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.MONACOIN, tests)
+	RunTestsEncode(t, coin.MONACOIN, tests)
 }
 
 func TestMonaDecodeToString(t *testing.T) {
@@ -179,7 +179,7 @@ func TestMonaDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.MONACOIN, tests)
+	RunTestsDecode(t, coin.MONACOIN, tests)
 }
 
 func TestQtumEncodeToBytes(t *testing.T) {
@@ -201,7 +201,7 @@ func TestQtumEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.QTUM, tests)
+	RunTestsEncode(t, coin.QTUM, tests)
 }
 
 func TestQtumDecodeToString(t *testing.T) {
@@ -227,7 +227,7 @@ func TestQtumDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.QTUM, tests)
+	RunTestsDecode(t, coin.QTUM, tests)
 }
 
 func TestVIAEncodeToBytes(t *testing.T) {
@@ -249,7 +249,7 @@ func TestVIAEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.VIACOIN, tests)
+	RunTestsEncode(t, coin.VIACOIN, tests)
 }
 
 func TestVIADecodeToString(t *testing.T) {
@@ -275,7 +275,7 @@ func TestVIADecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.VIACOIN, tests)
+	RunTestsDecode(t, coin.VIACOIN, tests)
 }
 
 func TestDigiByteEncodeToBytes(t *testing.T) {
@@ -297,7 +297,7 @@ func TestDigiByteEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.DIGIBYTE, tests)
+	RunTestsEncode(t, coin.DIGIBYTE, tests)
 }
 
 func TestDigiByteDecodeToString(t *testing.T) {
@@ -323,7 +323,7 @@ func TestDigiByteDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.DIGIBYTE, tests)
+	RunTestsDecode(t, coin.DIGIBYTE, tests)
 }
 
 func TestZcoinEncodeToBytes(t *testing.T) {
@@ -340,7 +340,7 @@ func TestZcoinEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ZCOIN, tests)
+	RunTestsEncode(t, coin.FIRO, tests)
 }
 
 func TestZcoinDecodeToString(t *testing.T) {
@@ -360,7 +360,7 @@ func TestZcoinDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ZCOIN, tests)
+	RunTestsDecode(t, coin.FIRO, tests)
 }
 
 func TestRavenEncodeToBytes(t *testing.T) {
@@ -377,7 +377,7 @@ func TestRavenEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.RAVENCOIN, tests)
+	RunTestsEncode(t, coin.RAVENCOIN, tests)
 }
 
 func TestRavenDecodeToString(t *testing.T) {
@@ -397,7 +397,7 @@ func TestRavenDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.RAVENCOIN, tests)
+	RunTestsDecode(t, coin.RAVENCOIN, tests)
 }
 
 func TestZCashEncodeToBytes(t *testing.T) {
@@ -454,7 +454,7 @@ func TestZCashEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ZCASH, tests)
+	RunTestsEncode(t, coin.ZCASH, tests)
 }
 
 func TestZCashDecodeToString(t *testing.T) {
@@ -491,5 +491,5 @@ func TestZCashDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ZCASH, tests)
+	RunTestsDecode(t, coin.ZCASH, tests)
 }

@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -14,8 +14,8 @@ var (
 )
 
 func init() {
-	toBytesMap[slip44.ONTOLOGY] = OntologyDecodeToBytes
-	toStringMap[slip44.ONTOLOGY] = OntologyEncodeToString
+	toBytesMap[coin.ONTOLOGY] = OntologyDecodeToBytes
+	toStringMap[coin.ONTOLOGY] = OntologyEncodeToString
 }
 
 // OntologyDecodeToBytes converts the input string to a byte array

@@ -3,7 +3,7 @@ package coincodec
 import (
 	"errors"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -11,8 +11,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.SOLANA] = SolanaDecodeToBytes
-	toStringMap[slip44.SOLANA] = SolanaEncodeToString
+	toBytesMap[coin.SOLANA] = SolanaDecodeToBytes
+	toStringMap[coin.SOLANA] = SolanaEncodeToString
 }
 
 // SolanaDecodeToBytes converts the input string to a byte array

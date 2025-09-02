@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/pkg/errors"
+	"github.com/trustwallet/go-primitives/coin"
 
 	"github.com/cpacia/bchutil"
-	"github.com/wealdtech/go-slip44"
 )
 
 const (
@@ -15,8 +15,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.BITCOIN_CASH] = BitcoinCashDecodeToBytes
-	toStringMap[slip44.BITCOIN_CASH] = BitcoinCashEncodeToString
+	toBytesMap[coin.BITCOINCASH] = BitcoinCashDecodeToBytes
+	toStringMap[coin.BITCOINCASH] = BitcoinCashEncodeToString
 }
 
 // BitcoinCashDecodeToBytes converts the input string to a byte array

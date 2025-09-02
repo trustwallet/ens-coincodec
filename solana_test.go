@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestSolanaEncodeToBytes(t *testing.T) {
@@ -46,7 +46,7 @@ func TestSolanaEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.SOLANA, tests)
+	RunTestsEncode(t, coin.SOLANA, tests)
 }
 
 func TestSolanaDecodeToString(t *testing.T) {
@@ -83,5 +83,5 @@ func TestSolanaDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.SOLANA, tests)
+	RunTestsDecode(t, coin.SOLANA, tests)
 }

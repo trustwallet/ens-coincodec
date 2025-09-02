@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestXRPEncodeToBytes(t *testing.T) {
-	tests := []TestcaseEncode {
+	tests := []TestcaseEncode{
 		{
 			name:   "Normal",
 			input:  "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
@@ -36,14 +36,14 @@ func TestXRPEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.RIPPLE, tests)
+	RunTestsEncode(t, coin.RIPPLE, tests)
 }
 
 func TestXRPDecodeToString(t *testing.T) {
 	keyhash := "004b4e9c06f24296074f7bc48f92a97916c6dc5ea9"
 	keyhash2 := "05444b4e9c06f24296074f7bc48f92a97916c6dc5ea9000000000000000000"
 
-	tests := []TestcaseDecode {
+	tests := []TestcaseDecode{
 		{
 			name:   "Good",
 			input:  keyhash,
@@ -56,5 +56,5 @@ func TestXRPDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.RIPPLE, tests)
+	RunTestsDecode(t, coin.RIPPLE, tests)
 }

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestPolkadotEncodeToBytes(t *testing.T) {
@@ -66,7 +66,7 @@ func TestPolkadotEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.POLKADOT, tests)
+	RunTestsEncode(t, coin.POLKADOT, tests)
 }
 
 func TestPolkadotDecodeToString(t *testing.T) {
@@ -103,5 +103,5 @@ func TestPolkadotDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.POLKADOT, tests)
+	RunTestsDecode(t, coin.POLKADOT, tests)
 }

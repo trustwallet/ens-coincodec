@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 func TestElrondEncodeToBytes(t *testing.T) {
@@ -62,7 +62,7 @@ func TestElrondEncodeToBytes(t *testing.T) {
 		},
 	}
 
-	RunTestsEncode(t, slip44.ELROND, tests)
+	RunTestsEncode(t, coin.ELROND, tests)
 }
 
 func TestElrondDecodeToString(t *testing.T) {
@@ -95,5 +95,5 @@ func TestElrondDecodeToString(t *testing.T) {
 		},
 	}
 
-	RunTestsDecode(t, slip44.ELROND, tests)
+	RunTestsDecode(t, coin.ELROND, tests)
 }

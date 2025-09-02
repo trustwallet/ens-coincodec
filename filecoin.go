@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 	"golang.org/x/crypto/blake2b"
 )
 
@@ -31,8 +31,8 @@ const (
 )
 
 func init() {
-	toBytesMap[slip44.FILECOIN] = FilecoinDecodeToBytes
-	toStringMap[slip44.FILECOIN] = FilecoinEncodeToString
+	toBytesMap[coin.FILECOIN] = FilecoinDecodeToBytes
+	toStringMap[coin.FILECOIN] = FilecoinEncodeToString
 }
 
 // Attempts to get the type by ASCII.

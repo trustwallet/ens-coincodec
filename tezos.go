@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -16,8 +16,8 @@ var (
 )
 
 func init() {
-	toBytesMap[slip44.TEZOS] = TezosDecodeToBytes
-	toStringMap[slip44.TEZOS] = TezosEncodeToString
+	toBytesMap[coin.TEZOS] = TezosDecodeToBytes
+	toStringMap[coin.TEZOS] = TezosEncodeToString
 }
 
 // TezosDecodeToBytes converts the input string to a byte array

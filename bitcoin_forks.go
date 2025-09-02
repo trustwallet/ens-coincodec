@@ -1,6 +1,8 @@
 package coincodec
 
-import "github.com/wealdtech/go-slip44"
+import (
+	"github.com/trustwallet/go-primitives/coin"
+)
 
 const (
 	ZCashStaticPrefixByte = 0x1C // 28
@@ -28,42 +30,42 @@ var (
 
 func init() {
 	// LTC
-	toBytesMap[slip44.LITECOIN] = MakeBitcoinDecodeToBytes(&configLTC)
-	toStringMap[slip44.LITECOIN] = MakeBitcoinEncodeToString(&configLTC)
+	toBytesMap[coin.LITECOIN] = MakeBitcoinDecodeToBytes(&configLTC)
+	toStringMap[coin.LITECOIN] = MakeBitcoinEncodeToString(&configLTC)
 
 	// DOGE
-	toBytesMap[slip44.DOGECOIN] = MakeBitcoinDecodeToBytes(&configDOGE)
-	toStringMap[slip44.DOGECOIN] = MakeBitcoinEncodeToString(&configDOGE)
+	toBytesMap[coin.DOGE] = MakeBitcoinDecodeToBytes(&configDOGE)
+	toStringMap[coin.DOGE] = MakeBitcoinEncodeToString(&configDOGE)
 
 	// DASH
-	toBytesMap[slip44.DASH] = MakeBitcoinDecodeToBytes(&configDASH)
-	toStringMap[slip44.DASH] = MakeBitcoinEncodeToString(&configDASH)
+	toBytesMap[coin.DASH] = MakeBitcoinDecodeToBytes(&configDASH)
+	toStringMap[coin.DASH] = MakeBitcoinEncodeToString(&configDASH)
 
 	// VIA
-	toBytesMap[slip44.VIACOIN] = MakeBitcoinDecodeToBytes(&configVIA)
-	toStringMap[slip44.VIACOIN] = MakeBitcoinEncodeToString(&configVIA)
+	toBytesMap[coin.VIACOIN] = MakeBitcoinDecodeToBytes(&configVIA)
+	toStringMap[coin.VIACOIN] = MakeBitcoinEncodeToString(&configVIA)
 
 	// DGB
-	toBytesMap[slip44.DIGIBYTE] = MakeBitcoinDecodeToBytes(&configDGB)
-	toStringMap[slip44.DIGIBYTE] = MakeBitcoinEncodeToString(&configDGB)
+	toBytesMap[coin.DIGIBYTE] = MakeBitcoinDecodeToBytes(&configDGB)
+	toStringMap[coin.DIGIBYTE] = MakeBitcoinEncodeToString(&configDGB)
 
 	// MONA
-	toBytesMap[slip44.MONACOIN] = MakeBitcoinDecodeToBytes(&configMONA)
-	toStringMap[slip44.MONACOIN] = MakeBitcoinEncodeToString(&configMONA)
+	toBytesMap[coin.MONACOIN] = MakeBitcoinDecodeToBytes(&configMONA)
+	toStringMap[coin.MONACOIN] = MakeBitcoinEncodeToString(&configMONA)
 
 	// XZC
-	toBytesMap[slip44.ZCOIN] = MakeBitcoinDecodeToBytes(&configXZC)
-	toStringMap[slip44.ZCOIN] = MakeBitcoinEncodeToString(&configXZC)
+	toBytesMap[coin.FIRO] = MakeBitcoinDecodeToBytes(&configXZC)
+	toStringMap[coin.FIRO] = MakeBitcoinEncodeToString(&configXZC)
 
 	// RVN
-	toBytesMap[slip44.RAVENCOIN] = MakeBitcoinDecodeToBytes(&configRVN)
-	toStringMap[slip44.RAVENCOIN] = MakeBitcoinEncodeToString(&configRVN)
+	toBytesMap[coin.RAVENCOIN] = MakeBitcoinDecodeToBytes(&configRVN)
+	toStringMap[coin.RAVENCOIN] = MakeBitcoinEncodeToString(&configRVN)
 
 	// QTUM
-	toBytesMap[slip44.QTUM] = MakeBitcoinDecodeToBytes(&configQTUM)
-	toStringMap[slip44.QTUM] = MakeBitcoinEncodeToString(&configQTUM)
+	toBytesMap[coin.QTUM] = MakeBitcoinDecodeToBytes(&configQTUM)
+	toStringMap[coin.QTUM] = MakeBitcoinEncodeToString(&configQTUM)
 
 	// ZCASH
-	toBytesMap[slip44.ZCASH] = MakeBitcoinDecodeToBytes(&configZCASH)
-	toStringMap[slip44.ZCASH] = MakeBitcoinEncodeToString(&configZCASH)
+	toBytesMap[coin.ZCASH] = MakeBitcoinDecodeToBytes(&configZCASH)
+	toStringMap[coin.ZCASH] = MakeBitcoinEncodeToString(&configZCASH)
 }

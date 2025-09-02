@@ -1,7 +1,7 @@
 package coincodec
 
 import (
-	"github.com/wealdtech/go-slip44"
+	"github.com/trustwallet/go-primitives/coin"
 )
 
 const (
@@ -14,8 +14,8 @@ var (
 )
 
 func init() {
-	toBytesMap[slip44.TRON] = TronDecodeToBytes
-	toStringMap[slip44.TRON] = TronEncodeToString
+	toBytesMap[coin.TRON] = TronDecodeToBytes
+	toStringMap[coin.TRON] = TronEncodeToString
 }
 
 // TronDecodeToBytes converts the input string to a byte array
