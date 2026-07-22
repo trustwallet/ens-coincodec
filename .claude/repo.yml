@@ -14,15 +14,15 @@
 schemaVersion: 1
 name: ens-coincodec
 summary: |-
-  Go utility library to provide movement between string and binary representation of multpile different cryptocurrency coin formats, mainly for ENS, please checkout EIP-2304 for details.
+  Domain: Cryptocurrency address codec library; implements EIP-2304 bidirectional conversion between human-readable coin addresses and their binary representations for ENS resolver storage.
 domain: library
 status: active
 
 # Capabilities this repo is authoritative for — the sharpest routing
 # signal. Seeded from the repo name; sharpen these by hand.
-owns: [ens-coincodec, ens, coincodec]
+owns: [ens-coincodec, eip-2304, coin-address-encoding, base58, bech32, bitcoin-address-codec]
 # Keywords a task might mention that point here (seeded from knowledge categories).
-topics: [anti-pattern, install, pattern, script]
+topics: [ens, eip-2304, address-encoding, address-decoding, cointype, slip44, base58, bech32, ss58, bitcoin, ethereum, cosmos, tron, polkadot, filecoin]
 
 # Repos/teams that depend on this one (curated — fill in).
 consumers: []

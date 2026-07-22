@@ -4,8 +4,12 @@
 
 ## What this repo is
 
-- Stack: Go
-- Knowledge base: 3 categories — ci, code-conventions, patterns
+- **Domain:** Cryptocurrency address codec library; implements EIP-2304 bidirectional conversion between human-readable coin addresses and their binary representations for ENS resolver storage.
+- **Route here:** Adding/fixing coin address encode/decode; EIP-2304 compliance; ENS multi-coin address resolution; Base58/Bech32/SS58 encoding primitives; Bitcoin fork configuration.
+- **Do not route here:** ENS contract deployment, ENS resolver contracts, ENS domain registration, Trust Wallet app UI, wallet-core signing, transaction broadcasting.
+- **Consumers:** Any Go service that resolves or sets multi-coin ENS records; `go-primitives` coin types are a dependency input.
+- **Ships:** A Go module (`github.com/trustwallet/ens-coincodec`) — library only, no binary.
+- **Agent map:** The public API is `ToBytes(address string, coinType uint32) ([]byte, error)` and `ToString(bytes []byte, coinType uint32) (string, error)` in `codec.go`. All coin codecs are auto-registered via `init()` functions. See `knowledge/architecture/overview.md` for the full architecture.
 
 ## Repo Manifest (for agents)
 
@@ -17,9 +21,13 @@ Agents: read it to decide whether a task belongs in **this** repo. To find the *
 
 For the structured knowledge base, see [knowledge/constitution.md](knowledge/constitution.md).
 
-- [ci](knowledge/ci/index.md) — CI/CD pipelines, deployment automation, and release processes
-- [code-conventions](knowledge/code-conventions/index.md) — Code conventions, style rules, and decision records
-- [patterns](knowledge/patterns/index.md) — Coding patterns, recipes, and proven approaches
+- [architecture](knowledge/architecture/index.md) — Architecture overview, encoding primitives, Bitcoin codec, call graph
+- [build](knowledge/build/index.md) — Go module, dependencies, CI
+- [ci](knowledge/ci/index.md) — CI/CD pipelines and workflows
+- [code-conventions](knowledge/code-conventions/index.md) — Code conventions, naming, error handling
+- [guides](knowledge/guides/index.md) — How-to guides (adding a new coin)
+- [patterns](knowledge/patterns/index.md) — Coding patterns (init registration, factory, etc.)
+- [tests](knowledge/tests/index.md) — Test strategy and helpers
 
 ## Learnings
 
@@ -48,9 +56,9 @@ The bar: would a future agent save time by reading this before touching the same
 
 ## Repository Knowledge Scope
 
-This repo's `knowledge/` covers: **ci, code-conventions, patterns**
+This repo's `knowledge/` covers: **architecture, build, ci, code-conventions, guides, patterns, tests**
 
-Topics NOT documented locally: architecture, build, conventions, core-libs, decisions, design, features, git-conventions, guides, observability, product, quality, security, tests, workflows, brand, business, legal, hr, prompts, api, specs, libs, components, references
+Topics NOT documented locally: conventions, core-libs, decisions, design, features, git-conventions, observability, product, quality, security, workflows, brand, business, legal, hr, prompts, api, specs, libs, components, references
 
 ## Org Knowledge Base (Bedrock)
 

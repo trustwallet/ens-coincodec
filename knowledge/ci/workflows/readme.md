@@ -144,3 +144,6 @@ If you are adding a new coin type please try to follow the following rules:
 ## See Also
 - [anti patterns failed approaches](../../code-conventions/code-style/anti-patterns-failed-approaches.md) <!-- rel:strong -->
 - [patterns validated approaches](../../patterns/patterns-validated-approaches.md) <!-- rel:strong -->
+- [overview](../../architecture/overview.md) <!-- rel:strong -->
+- [adding a new coin](../../guides/adding-a-new-coin.md) <!-- rel:strong -->
+- [overview](../../build/overview.md) <!-- rel:related -->

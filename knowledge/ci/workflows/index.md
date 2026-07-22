@@ -4,6 +4,7 @@
 
 ## Documents
 
-| Document | Source |
-|----------|--------|
-| [readme](readme.md) | README.md |
+| Document | Description | Source |
+|----------|-------------|--------|
+| [readme](readme.md) | Go utility library to provide movement between string and binary representation of multpile different cryptocurrency… | README.md |
+

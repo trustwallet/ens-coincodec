@@ -36,3 +36,9 @@ _struct · `test_runner.go`:11_
 | `output` | `string` | no |
 | `err` | `error` | no |
 
+## See Also
+- [adding a new coin](../../guides/adding-a-new-coin.md) <!-- rel:strong -->
+- [conventions](../../code-conventions/code-style/conventions.md) <!-- rel:strong -->
+- [strategy](../../tests/strategy.md) <!-- rel:related -->
+- [constitution](../../constitution.md) <!-- rel:related -->
+- [readme](../../ci/workflows/readme.md) <!-- rel:related -->

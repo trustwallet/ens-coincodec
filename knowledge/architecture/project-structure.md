@@ -68,3 +68,9 @@ _Single-module project_
 
 _No standard entry points detected_
 
+## See Also
+- [constitution](../constitution.md) <!-- rel:strong -->
+- [overview](../build/overview.md) <!-- rel:strong -->
+- [learnings](../learnings.md) <!-- rel:strong -->
+- [init registration](../patterns/init-registration.md) <!-- rel:related -->
+- [patterns validated approaches](../patterns/patterns-validated-approaches.md) <!-- rel:related -->
