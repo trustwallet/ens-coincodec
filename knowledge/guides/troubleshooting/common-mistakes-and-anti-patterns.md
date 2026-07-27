@@ -19,11 +19,6 @@ synthetic: synthesized-faq
 
 ### Code-conventions
 
-**From [Anti-Patterns (failed approaches)](../../code-conventions/anti-patterns-failed-approaches.md):**
-<!-- Add failed approaches here. Each anti-pattern should include:
-- **type**: anti-pattern
-- **discovered**: YYYY-MM-DD
-
 ### Guides
 
 **From [Adding a New Coin](../../guides/adding-a-new-coin.md):**
